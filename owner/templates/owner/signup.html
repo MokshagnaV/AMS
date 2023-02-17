@@ -4,7 +4,7 @@
 {% block title %}
     Sign Up
 {% endblock title %}
-
+p
 
 {% block cssfiles %}
     <link rel="stylesheet" href="{% static 'owner/signup.css' %}">
@@ -72,8 +72,8 @@
                 </div>
             </div>
         </div>
-        <input type="submit" id="yes" class="yes" name="Yes" />
+        <input type="submit" id="submit" class="yes" name="Yes" disabled/>
     </form>
-    <p>Already have an account? <a href="">Log in</a></p>
+    <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
 </div>
 {% endblock body %}

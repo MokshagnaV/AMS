@@ -88,6 +88,10 @@ input:valid:focus{
     font-weight: bolder;
 }
 
+input:disabled{
+    cursor:not-allowed;
+}
+
 .required{
     color: rgb(252, 55, 55);
 }

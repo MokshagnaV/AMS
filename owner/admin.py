@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import owner
+from .models import Owner
 
-admin.site.register(owner)
+admin.site.register(Owner)

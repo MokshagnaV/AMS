@@ -1,19 +1,24 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.views import View
-from .models import owner
+from .models import Owner
 # Create your views here.
 
 class signup(View):
     def post(self, request):
         form = request.POST['Yes']
         if form == 'Submit':
-            name_ = request.POST['fname'] + request.POST['lname']
+            name_ = request.POST['fname'] + " " +request.POST['lname']
             email_ = request.POST['email']
             contact_ = request.POST['phnumber']
             password_ = request.POST['pass']
+            confpassword = request.POST['confpas']
             flatno = request.POST['flatno']
             floorno = request.POST['floorno']
-            owner_details = owner(
+
+            if password_!= confpassword:
+                return render(request, 'owner/signup.html')
+
+            owner_details = Owner(
                 password = password_,
                 name = name_,
                 email = email_,

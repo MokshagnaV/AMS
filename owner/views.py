@@ -1,11 +1,11 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.views import View
-from .models import Owner
+from .models import Owner, Notice
 # Create your views here.
 
 class signup(View):
     def post(self, request):
-        form = request.POST['Yes']
+        form = request.POST['submit']
         if form == 'Submit':
             name_ = request.POST['fname'] + " " +request.POST['lname']
             email_ = request.POST['email']
@@ -38,3 +38,12 @@ class login(View):
         pass
     def get(self, request):
         return render(request, 'owner/login.html')
+    
+class index(View):
+    def post(self, request):
+        pass
+    def get(self, request):
+        notices = Notice.objects.all()
+        return render(request, 'owner/index.html', {
+            "notices": notices,
+        })

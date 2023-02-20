@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    background-color: #dfdfdf;
+}
+
+.form {
+    border-radius: 10px;
+    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.33);
+    padding: 1rem 2rem;
+    margin: 1rem auto;
+    width: fit-content;
+    background-color: #ffffff;
+}
+
+input{
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 2rem;
+
+}

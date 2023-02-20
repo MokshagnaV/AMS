@@ -12,3 +12,11 @@ class Owner(models.Model):
 
     def __str__(self):
         return f"{self.name},{self.flat_no}"
+    
+class Notice(models.Model):
+    notice_title = models.CharField(max_length=100, default="null")
+    notice_desc = models.CharField(max_length=2000)
+
+    def __str__(self):
+        return f"{self.notice_title},"
+

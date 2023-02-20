@@ -1,0 +1,24 @@
+{% extends 'ownerbase.html' %}
+{% load static %}
+
+{% block title %}
+    Owner's Page    
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'owner/index.css' %}">
+{% endblock cssfiles %}
+
+{% block body %}
+    <h1>Owner's Page</h1>
+
+    <section class="notices">
+        {% for notice in notices %}
+        
+        <div class="notice">
+            <h2>{{ notice.notice_title | title }}</h2>
+            <p>{{ notice.notice_desc }}</p>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock body %}

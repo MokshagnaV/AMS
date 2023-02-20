@@ -1,0 +1,27 @@
+{% extends 'associationbase.html' %}
+{% load static %}
+
+{% block title %}
+    Add Notice
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'association/noticesadd.css' %}">
+{% endblock cssfiles %}
+
+{% block body %}
+
+    <h1>Add Notice</h1>
+
+    <div class="form">
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="notice-title">Title</label>
+            <input type="text" name="notice-title" id="notice-title">
+            <label for="desc">Event Description:</label>
+            <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+            <input type="reset">
+            <input type="submit" id="submit" class="submit button" name="submit"/>
+        </form>
+    </div>
+{% endblock body %}

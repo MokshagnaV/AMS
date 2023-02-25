@@ -6,4 +6,8 @@
 
 {% block body %}
     <h1>Association Page</h1>
+    <nav>
+        <a href="{% url 'notices_add' %}">Add Notices</a>
+        <a href="{% url 'complaints' %}">View complaints</a>
+    </nav>
 {% endblock body %}

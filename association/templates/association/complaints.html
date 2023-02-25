@@ -1,0 +1,29 @@
+{% extends 'associationbase.html' %}
+{% load static %}
+
+{% block title %}
+    Complaints
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'association/complaints.css' %}">
+{% endblock cssfiles %}
+
+{% block body %}
+    <main>
+        <h1>All Complaints</h1>
+        <div class="complaints">
+            {% for complaint in complaints %}
+                <div class="complaint">
+                    <h2> {{ complaint.issued_date }} </h2>
+                    <p>{{ complaint.complaint_desc }}</p>
+                    {% if complaint.resolved_date %}
+                        <span>Resolved</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock body %}
+
+

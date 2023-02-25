@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.views import View
 from .models import Owner, Notice
+from association.models import Complaint
+from django.utils import timezone
 # Create your views here.
 
 class signup(View):
@@ -43,7 +45,19 @@ class index(View):
     def post(self, request):
         pass
     def get(self, request):
-        notices = Notice.objects.all()
+        notices = Notice.objects.all().order_by("-id")
         return render(request, 'owner/index.html', {
             "notices": notices,
         })
+
+class post_complaints(View):
+    def post(self, request):
+        form = request.POST['submit']
+        if form == 'Post':
+            desc = request.POST['complaint_desc']
+            Complaint.objects.create(complaint_desc=desc, issued_date = timezone.now())
+            return render(request, 'owner/index.html')
+        return render(request, 'owner/postcomplaints.html')
+
+    def get(self, request):
+        return render(request, 'owner/postcomplaints.html')

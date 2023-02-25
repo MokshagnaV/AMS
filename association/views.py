@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from owner.models import Notice
+from .models import Complaint
 # Create your views here.
 
 class notice_add(View):
@@ -22,3 +23,11 @@ class index(View):
     def get(self, request):
         return render(request, 'association/index.html')
 
+class complaints(View):
+    def post(slef, request):
+        pass
+    def get(self, request):
+        complaints = Complaint.objects.all().order_by('-id')
+        return render(request, 'association/complaints.html', {
+            "complaints": complaints 
+        })

@@ -11,7 +11,11 @@
 
 {% block body %}
     <h1>Owner's Page</h1>
-    <nav><a href="{% url 'post-complaints' %}">ANY COMPLAINTS??</a></nav>
+    <nav>
+        <a href="{% url 'owner-ledger' %}">View Ledger</a>
+        <a href="{% url 'post-complaints' %}">ANY COMPLAINTS??</a>
+    </nav>
+
     <section class="notices">
         {% for notice in notices %}
         

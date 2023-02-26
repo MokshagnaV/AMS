@@ -1,9 +1,11 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.views import View
 from .models import Owner, Notice
-from association.models import Complaint
+from association.models import Complaint, Expenditure
 from django.utils import timezone
 # Create your views here.
+
+months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":"May", "06": "June", "07": "July", "08":"August", "09": "September","10":"October","11":"November", "12": "December"}
 
 class signup(View):
     def post(self, request):
@@ -61,3 +63,24 @@ class post_complaints(View):
 
     def get(self, request):
         return render(request, 'owner/postcomplaints.html')
+
+class ledger(View):
+    def post(slef, request):
+        form = request.POST['submit']
+        if form == 'get':
+            month = request.POST['month']
+            year = request.POST['year']
+            expenditures = Expenditure.objects.filter(month__year= year , month__month= month)
+            month = months[month]
+            return render(request, 'owner/ledger.html', {
+                "months":months,
+                "month": month,
+                "year": year,
+                "expenditures": expenditures
+            })
+        
+        return render(request, 'owner/ledger.html')
+    def get(self, request):        
+        return render(request, 'owner/ledger.html',{
+            "months":months,
+        })

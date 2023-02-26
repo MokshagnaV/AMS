@@ -1,0 +1,22 @@
+{% if expenditures %}
+<table>
+    <thead>
+        <tr>
+            <th>Expense</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenditures %}
+        <tr>
+            <td>{{expense.item}}</td>
+            <td>{{expense.amount}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+
+<h1>No Expenditure for selected month</h1>
+
+{% endif %}

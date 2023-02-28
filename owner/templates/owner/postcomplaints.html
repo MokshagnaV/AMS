@@ -9,18 +9,16 @@
     <link rel="stylesheet" href="{% static 'owner/postcomplaints.css' %}">
 {% endblock cssfiles %}
 
-{% block body %}
-    <main>
-        <div class="card">
-            <h1>Post your Complaints</h1>
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="formdiv">
-                    <textarea name="complaint_desc" id="desc" cols="30" rows="10"></textarea>
-                    <input type="submit" id="submit" value="Post" class="submit button" name="submit"/>
-                    <input type="reset">
-                </div>
-            </form>
-        </div>
-    </main>
-{% endblock body %}
+{% block main %}
+    <div class="card">
+        <h1>Post your Complaints</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="formdiv">
+                <textarea name="complaint_desc" id="desc" cols="30" rows="10"></textarea>
+                <input type="submit" id="submit" value="Post" class="submit button" name="submit"/>
+                <input type="reset">
+            </div>
+        </form>
+    </div>
+{% endblock main %}

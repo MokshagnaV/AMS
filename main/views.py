@@ -11,6 +11,8 @@ class index(View):
     
 class login(View):
     def post(self, request):
-        pass
+        form = request.POST['submit']
+        if form == 'submit':
+            pass
     def get(self, request):
         return render(request, 'main/login.html')

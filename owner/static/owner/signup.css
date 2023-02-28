@@ -54,6 +54,7 @@ body{
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.418);
     padding: 10px;
     margin-bottom: 1rem;
+    background-color: #ffffff;
 }
 
 label{

@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Login Page</title>
+	<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+</head>
+
+<body>
+	<header>
+		<h1 class="heading">Login Page</h1>
+	</header>
+
+	<div class="container">
+		<div class="slider"></div>
+		<div class="btn">
+			<button class="login">Owner</button>
+			<button class="signup">Association</button>
+		</div>
+
+		<div class="form-section">
+			<div class="login-box">
+				<input type="email" class="email ele" placeholder="youremail@email.com">
+				<input type="password" class="password ele" placeholder="password">
+				<input type="submit" name="owner" value="Login" class="clkbtn">
+			</div>
+
+			<!-- signup form -->
+			<div class="login-box">
+				<input type="email" class="email ele" placeholder="youremail@email.com">
+				<input type="password" class="password ele" placeholder="password">
+				<input type="submit" name="association" value="Login" class="clkbtn">
+			</div>
+		</div>
+	</div>
+	<script src="{% static 'main/js/login.js' %}"></script>
+</body>
+
+</html>

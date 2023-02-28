@@ -61,10 +61,13 @@ class addexpense(View):
         form = request.POST['submit']
         if form == 'submit':
             date = request.POST['date']
-            expense = request.POST['expense']
-            amount = request.POST['amount']
-
-            Expenditure.objects.create(month=date, item=expense, amount=amount)
+            try:
+                for i in range(1, 100):    
+                    expense = request.POST[f'expense{i}']
+                    amount = request.POST[f'amount{i}']
+                    Expenditure.objects.create(month=date, item=expense, amount=amount)
+            except(Exception):
+                pass
             return redirect(reverse('ledger'))
         return render(request, 'association/addexpense.html')
     def get(self, request):

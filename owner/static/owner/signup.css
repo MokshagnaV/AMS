@@ -5,6 +5,7 @@ body{
     display: flex;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to top, #2980b9, #6dd5fa, #ffffff);
 }
 .logo-section{
     display: flex;

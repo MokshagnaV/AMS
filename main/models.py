@@ -43,7 +43,7 @@ class Owner(User):
         proxy = True
 
     def welcome(self):
-        return "Only for Libraries"
+        return "Only for Owners"
 
 
 @receiver(post_save, sender=Owner)
@@ -60,8 +60,8 @@ class OwnerProfile(models.Model):
     OwnerName=models.CharField(max_length=100, null=True)
     OwnerAddress = models.CharField(max_length=200, null=True)
     OwnerpNo = models.IntegerField( null=True)
-    FlatNo = models.IntegerField()
-    FloorNo = models.IntegerField()
+    FlatNo = models.IntegerField( null=True)
+    FloorNo = models.IntegerField( null=True)
 #------------------------------------------------------------------
 
 class AssociationManager(BaseUserManager):

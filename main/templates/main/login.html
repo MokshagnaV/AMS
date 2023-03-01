@@ -23,18 +23,24 @@
 		</div>
 
 		<div class="form-section">
-			<div class="login-box">
-				<input type="username" class="email ele" name="username" placeholder="youremail@email.com">
-				<input type="password" class="password ele" name="password" placeholder="password">
-				<input type="submit" name="owner" value="Login" class="clkbtn">
-			</div>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="login-box">
+					<input type="username" class="email ele" name="owner-username" placeholder="username">
+					<input type="password" class="password ele" name="owner-password" placeholder="password">
+					<input type="submit" name="owner" value="Login" class="clkbtn">
+				</div>
+			</form>
 
 			<!-- Association form -->
-			<div class="login-box">
-				<input type="username" class="email ele" name="username" placeholder="youremail@email.com">
-				<input type="password" class="password ele" name="password" placeholder="password">
-				<input type="submit" name="association" value="Login" class="clkbtn">
-			</div>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="login-box">
+					<input type="username" class="email ele" name="assocation-username" placeholder="username">
+					<input type="password" class="password ele" name="assocation-password" placeholder="password">
+					<input type="submit" name="association" value="Login" class="clkbtn">
+				</div>
+			</form>
 		</div>
 	</div>
 	<script src="{% static 'main/js/login.js' %}"></script>

@@ -9,8 +9,8 @@ months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":
 
 class notice_add(View):
     def post(self, request):
-        form = request.POST['submit']
-        if form == 'Submit':
+        form = request.POST['notices']
+        if form == 'Add':
             notice_title = request.POST['notice-title']
             desc = request.POST['desc']
             Notice.objects.create(notice_title=notice_title, notice_desc=desc)

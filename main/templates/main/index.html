@@ -45,7 +45,7 @@
    <body class="main-layout">
       <!-- loader  -->
       <div class="loader_bg">
-         <div class="loader"><img src="{% static 'main/images/loading.gif' %}" alt="#" /></div>
+         <div class="loader"><img src="{% static 'main/images/load.gif' %}" alt="#" /></div>
       </div>
       <!-- end loader -->
       <!-- header -->
@@ -88,12 +88,6 @@
                               <li class="nav-item">
                                  <a class="nav-link" href="#Contact Us">Contact Us</a>
                               </li>
-                              {% comment %} <li class="nav-item d_none">
-                                 <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-user-circle padd_right" aria-hidden="true"></i>Login/Register</a>
-                              </li> {% endcomment %}
-                              {% comment %} <li class="nav-item d_none">
-                                 <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                              </li> {% endcomment %}
                            </ul>
                         </div>
                      </nav>
@@ -138,94 +132,12 @@
                      </div>
                   </div>
                </div>
-               <div class="carousel-item">
-                  <div class="container-fluid">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <h1>Welcome</h1>
-                                 <span>Venkata Sai Heights</span>
-                                 <p>Welcome to Venkata Sai Heights Apartment.This was developed in 
-                                    1 Acre land.Apartment consists of a Play Area for Children and surrounded with a Garden.
-                                    Apartment consist of G+7 floors and 8 flats in each floor.except Ground floor
-                                    Ground floor consists of Office room,Association room and it consist of function hall
-                                    and 4 flats rest of the floors consists of 8 flats.And having 2 cellars for Parking. </p>
-                                 <a href="#About">About </a> <a href="#Contact Us">Contact Us</a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="{% static 'main\images\appartment.jpeg' %}" style="width:50%" style="height:50%"></figure>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container-fluid">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <h1>Welcome</h1>
-                                 <span>Venkata Sai Heights</span>
-                                 <p>Welcome to Venkata Sai Heights Apartment.This was developed in 
-                                    1 Acre land.Apartment consists of a Play Area for Children and surrounded with a Garden.
-                                    Apartment consist of G+7 floors and 8 flats in each floor.except Ground floor
-                                    Ground floor consists of Office room,Association room and it consist of function hall
-                                    and 4 flats rest of the floors consists of 8 flats.And having 2 cellars for Parking. </p>
-                                    <a href="#About">About </a> <a href="#Contact Us">Contact Us</a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="{% static 'main\images\appartment.jpeg' %}" style="width:50%" style="height:50%"></figure>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
             </div>
-            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-            </a>
-            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </a>
          </div>
       </section>
       <!-- end banner -->
       <!-- three_box -->
-      <!-- <div class="three_box">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <h3>AUTO DIAGNOSE</h3>
-                     <i><img src="main/images/thr.png" alt="#"/></i>
-                     <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d veniam</p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <h3>AUTO DIAGNOSE</h3>
-                     <i><img src="main/images/thr1.png" alt="#"/></i>
-                     <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d veniam</p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <h3>AUTO DIAGNOSE</h3>
-                     <i><img src="main/images/thr2.png" alt="#"/></i>
-                     <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d veniam</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div> -->
+      
       <!-- three_box -->
       <!-- about -->
       <div  class="about" id="About">
@@ -233,7 +145,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>Venkata Sai Heights </h2>
+                     <h2>About</h2>
                   </div>
                </div>
             </div>
@@ -243,13 +155,13 @@
                      <div class="about_img">
                         <div class="about_box">
                            <h3>Venkata Sai Heights  </h3>
-                           <p>The Apartment is located in Hanuman Nagar Near Ambedhkar Stadium.
+                           <p style="text-align:justify;">The Apartment is located in Hanuman Nagar Near Ambedhkar Stadium.
                               The apartment is developed in 1 Acre land.It consists of Seven floors
                            and 8 Flats in each floor except the ground floor.The ground floor consists of
                          a mini function hall,Association and Office rooms and also four flats.The apartment is surrounded 
                         by green garden and it consists of small play area for children.This apartment also provides
                      amenities like centralized cooking gas and intercom.   </p>
-                           <a class="read_more">Read More</a>
+                           {% comment %} <a class="read_more">Read More</a> {% endcomment %}
                         </div>
                      </div>
                   </div>
@@ -305,7 +217,6 @@
                         </div>
                      </div>
                   </div>
-                  <a class="read_more" href="#">See More</a>
                </div>
             </div>
          </div>
@@ -430,11 +341,14 @@
                      </div>
                   </div>
                   <div class="col-md-8">
-                     <ul class="location_icon" id="Location">
+                     {% comment %} <ul class="location_icon" id="Location">
                         <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Locations</li>
                         <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> ***********</li>
                         <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>demo@gmail.com</li>
-                     </ul>
+                     </ul> {% endcomment %}
+                     <div class="titlepage">
+                        <h2>Location</h2>
+                     </div>
                   </div>
                   <div class="col-md-6">
                      <form id="request" class="main_form">
@@ -454,19 +368,11 @@
                            <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
                               <button class="send_btn">Send</button>
                            </div>
-                           {% comment %} <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                              <ul class="social_icon">
-                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                              </ul>
-                           </div> {% endcomment %}
                         </div>
                      </form>
                   </div>
                   <div class="col-md-6">
-                     <div class="map">
+                     <div class="map" id="Location">
                         <div>
                            <iframe style="border:0; width:100%; height:350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3785.247257522347!2d79.12840721391883!3d18.42707937683846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccd9cee55e1c59%3A0x4c19cc42848af832!2sVenkata%20Sai%20Heights!5e0!3m2!1sen!2sin!4v1677505789897!5m2!1sen!2sin" width="80%" height="80%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>

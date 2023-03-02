@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from .models import Owner, Notice
-from association.models import Complaint, Expenditure
-from main.models import Owner
+from association.models import Complaint, Expenditure, Payment
+from main.models import Owner, Association
 from django.utils import timezone
 import datetime
 
@@ -61,3 +61,19 @@ def ledger(request):
         "year": year,
         "expenditures": expenditures
     }) 
+
+def make_payment(request):
+    if request.method == 'POST':
+        form = request.POST['submit']
+        if form == 'Done':
+            amount = request.POST['amount']
+            payment_mode = request.POST['payment_mode']
+            payment_desc = request.POST['payment_desc']
+            utr = request.POST['utr']
+            user = Owner.objects.get(username = request.session.get('uname'))
+            
+            Payment.objects.create(user = user, payment_desc = payment_desc, payment_mode = payment_mode, UTR = utr, payment_date = timezone.now(), amount = amount)
+            return redirect('owner-home')
+        return render(request, 'owner/makepayment.html')
+    
+    return render(request, 'owner/makepayment.html')

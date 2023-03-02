@@ -24,6 +24,7 @@ class Payment(models.Model):
     payment_mode = models.CharField(max_length = 100)
     UTR = models.CharField(max_length=100, null=True)
     payment_date = models.DateTimeField()
+    amount = models.IntegerField(null=True)
 
     def __str__(self):
         return f"{self.user}, {self.payment_mode}"

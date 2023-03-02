@@ -23,14 +23,6 @@
 
 {% include 'includes/expenditure.html' %}
 
-<h1>Income</h1>
-<script>
-    const years = document.querySelector("#year");
-    for(let i = 2010; i < 2040; i++){
-        const option = document.createElement("option");
-        option.setAttribute("value", i);
-        option.appendChild(document.createTextNode(i));
-        years.appendChild(option);
-    }
-</script>
+
+
 {% endblock body %}

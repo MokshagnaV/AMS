@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from owner.models import Notice
-from .models import Complaint, Expenditure
+from .models import Complaint, Expenditure, Payment
 from django.urls import reverse
 from main.models import Owner, Association
 import datetime
@@ -79,3 +79,27 @@ def addexpense(request):
             return redirect(reverse('association-ledger'))
         return render(request, 'association/addexpense.html')
     return render(request, 'association/addexpense.html')
+
+def payments(request):
+    if request.method == 'POST':
+        form = request.POST['submit']
+        if form == 'get':
+            month = request.POST['month']
+            year = request.POST['year']
+            print(month +" "+year)
+            month_payments = Payment.objects.filter(payment_date__year= year , payment_date__month= month)
+            print(month_payments)
+            month = months[month]
+            return render(request, 'association/payments.html', {
+                "months":months,
+                "month": month,
+                "year": year,
+                "month_payments": month_payments
+            })
+        return redirect('payments')    
+
+    payments = Payment.objects.all()
+    return render(request, 'association/payments.html',{
+        "months":months,
+        "payments": payments
+    })

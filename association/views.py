@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from owner.models import Notice
 from .models import Complaint, Expenditure
 from django.urls import reverse
+import datetime
 # Create your views here.
 
 months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":"May", "06": "June", "07": "July", "08":"August", "09": "September","10":"October","11":"November", "12": "December"}
@@ -42,11 +43,23 @@ def ledger(request):
                 "expenditures": expenditures
             })
         
-        return render(request, 'association/ledger.html')
+        return redirect('association-ledger')
     
+    today = datetime.date.today()
+
+    year = today.year
+    month = "{:02d}".format(today.month - 1)
+    if(month == 12):
+        year -= 1
+
+    expenditures = Expenditure.objects.filter(month__year= year , month__month= month)
+
     return render(request, 'association/ledger.html',{
         "months":months,
-    })
+        "month": months[month],
+        "year": year,
+        "expenditures": expenditures
+    }) 
 
 def addexpense(request):
     if request.method == 'POST':

@@ -1,5 +1,4 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from django.views import View
 from .models import Owner, Notice
 from association.models import Complaint, Expenditure
 from django.utils import timezone
@@ -7,8 +6,8 @@ from django.utils import timezone
 
 months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":"May", "06": "June", "07": "July", "08":"August", "09": "September","10":"October","11":"November", "12": "December"}
 
-class signup(View):
-    def post(self, request):
+def signup(request):
+    if request.method == 'POST':
         form = request.POST['submit']
         if form == 'Submit':
             name_ = request.POST['fname'] + " " +request.POST['lname']
@@ -34,38 +33,29 @@ class signup(View):
 
             return HttpResponseRedirect("/owner/login")
         return render(request, 'owner/login.html')
-    def get(self, request):
-        return render(request, 'owner/signup.html')
+    return render(request, 'owner/signup.html')
 
-class login(View):
-    def post(self, request):
-        pass
-    def get(self, request):
-        return render(request, 'owner/login.html')
+def login(request):
+    return render(request, 'owner/login.html')
     
-class index(View):
-    def post(self, request):
-        pass
-    def get(self, request):
-        notices = Notice.objects.all().order_by("-id")
-        return render(request, 'owner/index.html', {
-            "notices": notices,
-        })
+def index(request):
+    notices = Notice.objects.all().order_by("-id")
+    return render(request, 'owner/index.html', {
+        "notices": notices,
+    })
 
-class post_complaints(View):
-    def post(self, request):
+def post_complaints(request):
+    if request.method == 'POST':
         form = request.POST['submit']
         if form == 'Post':
             desc = request.POST['complaint_desc']
             Complaint.objects.create(complaint_desc=desc, issued_date = timezone.now())
             return render(request, 'owner/index.html')
         return render(request, 'owner/postcomplaints.html')
+    return render(request, 'owner/postcomplaints.html')
 
-    def get(self, request):
-        return render(request, 'owner/postcomplaints.html')
-
-class ledger(View):
-    def post(slef, request):
+def ledger(request):
+    if request.method == 'POST':
         form = request.POST['submit']
         if form == 'get':
             month = request.POST['month']
@@ -80,7 +70,6 @@ class ledger(View):
             })
         
         return render(request, 'owner/ledger.html')
-    def get(self, request):        
-        return render(request, 'owner/ledger.html',{
-            "months":months,
-        })
+    return render(request, 'owner/ledger.html',{
+        "months":months,
+    })

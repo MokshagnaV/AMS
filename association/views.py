@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.views import View
 from owner.models import Notice
 from .models import Complaint, Expenditure
 from django.urls import reverse
@@ -7,8 +6,8 @@ from django.urls import reverse
 
 months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":"May", "06": "June", "07": "July", "08":"August", "09": "September","10":"October","11":"November", "12": "December"}
 
-class notice_add(View):
-    def post(self, request):
+def notice_add(request):
+    if request.method == 'POST':
         form = request.POST['notices']
         if form == 'Add':
             notice_title = request.POST['notice-title']
@@ -16,27 +15,20 @@ class notice_add(View):
             Notice.objects.create(notice_title=notice_title, notice_desc=desc)
             return render(request, 'association/index.html')
         return render(request, 'association/noticesadd.html')
-        
-    def get(self, request):
-        return render(request, 'association/noticesadd.html')
+    
+    return render(request, 'association/noticesadd.html')
 
-class index(View):
-    def post(self, request):
-        pass
-    def get(self, request):
-        return render(request, 'association/index.html')
+def index(request):
+    return render(request, 'association/index.html')
 
-class complaints(View):
-    def post(slef, request):
-        pass
-    def get(self, request):
-        complaints = Complaint.objects.all().order_by('-id')
-        return render(request, 'association/complaints.html', {
-            "complaints": complaints 
-        })
+def complaints(request):
+    complaints = Complaint.objects.all().order_by('-id')
+    return render(request, 'association/complaints.html', {
+        "complaints": complaints 
+    })
 
-class ledger(View):
-    def post(slef, request):
+def ledger(request):
+    if request.method == 'POST':
         form = request.POST['submit']
         if form == 'get':
             month = request.POST['month']
@@ -51,13 +43,13 @@ class ledger(View):
             })
         
         return render(request, 'association/ledger.html')
-    def get(self, request):        
-        return render(request, 'association/ledger.html',{
-            "months":months,
-        })
+    
+    return render(request, 'association/ledger.html',{
+        "months":months,
+    })
 
-class addexpense(View):
-    def post(self, request):
+def addexpense(request):
+    if request.method == 'POST':
         form = request.POST['submit']
         if form == 'submit':
             date = request.POST['date']
@@ -70,5 +62,4 @@ class addexpense(View):
                 pass
             return redirect(reverse('ledger'))
         return render(request, 'association/addexpense.html')
-    def get(self, request):
-        return render(request, 'association/addexpense.html')
+    return render(request, 'association/addexpense.html')

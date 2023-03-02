@@ -23,7 +23,7 @@
 		</div>
 
 		<div class="form-section">
-			<form action="" method="POST">
+			<form action="{% url 'owner-login' %}" method="POST">
 				{% csrf_token %}
 				<div class="login-box">
 					<input type="username" class="email ele" name="owner-username" placeholder="username">
@@ -33,7 +33,7 @@
 			</form>
 
 			<!-- Association form -->
-			<form action="" method="POST">
+			<form action="{% url 'association-login' %}" method="POST">
 				{% csrf_token %}
 				<div class="login-box">
 					<input type="username" class="email ele" name="assocation-username" placeholder="username">

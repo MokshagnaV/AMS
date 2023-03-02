@@ -2,17 +2,15 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .models import Owner, Association
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout
 # Create your views here.
 
-class index(View):
-    def post(self, request):
-        pass
-    def get(self, request):
+def index(request):
         return render(request, 'main/index.html')
     
-class login(View):
-    def post(self, request):
+def owner_login(request):
+    if request.method == 'POST':
+        print('HELLOO OWNER')
         form = request.POST['owner']
         if form == 'Login':
             username = request.POST['owner-username']
@@ -25,35 +23,39 @@ class login(View):
 
                 if user is not None:
                     request.session['uname']=username
-                    login(request, user)
+                    auth_login(request, user)
                     return redirect('owner-home')
                 else:
                     messages.info(request, 'Username Or Password is incorrect')
                     return render(request, "main/login.html")
+    return redirect('main-login')
     
+
+def association_login(request):
+    if request.method == 'POST':
         form = request.POST['association']
         if form == 'Login':
             username = request.POST['assocation-username']
             password = request.POST['assocation-password']
 
             details = Association.objects.get(role = 'Association', username = username)
-
             if details.role == 'ASSOCIATION':
                 user= authenticate(request, username=username, password=password)
 
                 if user is not None:
                     request.session['uname']=username
-                    login(request, user)
+                    auth_login(request, user)
                     return redirect('association-home')
                 else:
                     messages.info(request, 'Username Or Password is incorrect')
                     return render(request, "main/login.html")
-            
-    def get(self, request):
-        return render(request, 'main/login.html')
+    return redirect('main-login')
+
+def login(request):
+    return render(request, 'main/login.html')
     
-class signup(View):
-    def post(self, request):
+def signup(request):
+    if request == 'POST':
         form=request.POST['submit']
         if form=='Submit':
             username = request.POST['username']
@@ -68,8 +70,10 @@ class signup(View):
             elif usertype == 'Association':
                 Association.objects.create_user(username = username, password = password)
                 
-
-            return render(request, "Book/homepage.html")
-
-    def get(self, request):
-        return render(request, 'main/signup.html')
+    return render(request, "main/signup.html")
+    
+def logoutUser(request):
+    del request.session['uname']  
+    logout(request)
+    #messages.info(request, 'Logout successful')
+    return render(request, 'main/index.html')

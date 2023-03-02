@@ -19,6 +19,7 @@
                     {% for notice in notices %}
             
                     <div class="notice">
+                        <p>This notice is posted by {{ notice.notice_by | title }}</p>
                         <h2 class="notice-title">{{ notice.notice_title | title }}</h2>
                         <p class="notice-desc">{{ notice.notice_desc }}</p>
                     </div>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from owner.models import Notice
 from .models import Complaint, Expenditure
 from django.urls import reverse
+from main.models import Owner, Association
 import datetime
 # Create your views here.
 
@@ -13,7 +14,9 @@ def notice_add(request):
         if form == 'Add':
             notice_title = request.POST['notice-title']
             desc = request.POST['desc']
-            Notice.objects.create(notice_title=notice_title, notice_desc=desc)
+            user = Association.objects.get(username = request.session.get('uname'))
+
+            Notice.objects.create(notice_by=user,notice_title=notice_title, notice_desc=desc)
             return render(request, 'association/index.html')
         return render(request, 'association/noticesadd.html')
     
@@ -73,6 +76,6 @@ def addexpense(request):
                     Expenditure.objects.create(month=date, item=expense, amount=amount)
             except(Exception):
                 pass
-            return redirect(reverse('ledger'))
+            return redirect(reverse('association-ledger'))
         return render(request, 'association/addexpense.html')
     return render(request, 'association/addexpense.html')

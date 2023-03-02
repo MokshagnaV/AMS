@@ -55,7 +55,7 @@ def login(request):
     return render(request, 'main/login.html')
     
 def signup(request):
-    if request == 'POST':
+    if request.method == 'POST':
         form=request.POST['submit']
         if form=='Submit':
             username = request.POST['username']
@@ -76,4 +76,4 @@ def logoutUser(request):
     del request.session['uname']  
     logout(request)
     #messages.info(request, 'Logout successful')
-    return render(request, 'main/index.html')
+    return redirect('main')

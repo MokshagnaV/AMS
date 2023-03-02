@@ -16,7 +16,7 @@
             {% for complaint in complaints %}
                 <div class="complaint">
                     <h2> {{ complaint.complaint_desc }} </h2>
-                    <p>{{ complaint.issued_date }}</p>
+                    <p>By {{ complaint.complaint_by | title }} {{ complaint.issued_date }}</p>
                     {% if complaint.resolved_date %}
                         <span>Resolved</span>
                     {% endif %}

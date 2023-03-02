@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from .models import Owner, Notice
 from association.models import Complaint, Expenditure
+from main.models import Owner
 from django.utils import timezone
 import datetime
 
@@ -22,7 +23,8 @@ def post_complaints(request):
         form = request.POST['submit']
         if form == 'Post':
             desc = request.POST['complaint_desc']
-            Complaint.objects.create(complaint_desc=desc, issued_date = timezone.now())
+            user = Owner.objects.get(username = request.session.get('uname'))
+            Complaint.objects.create(complaint_by = user,complaint_desc=desc, issued_date = timezone.now())
             return redirect('owner-home')
         return render(request, 'owner/postcomplaints.html')
     return render(request, 'owner/postcomplaints.html')

@@ -381,15 +381,15 @@ ul.btn li:last-child {
 /** banner section **/
 
 .banner_main {
-     background: url(../images/apart.jpeg);
-     mask-image: url();
+     background:linear-gradient(to bottom, rgb(21, 89, 183,0.75), #4f7af3), url(../images/apart.jpeg);
      background-repeat: no-repeat;
      min-height: 700px;
-     background-size: 100% 100%;
+     background-size: 100%;
      display: flex;
      justify-content: center;
      align-content: center;
      align-items: center;
+
 }
 
 .text-bg {
@@ -652,6 +652,7 @@ ul.btn li:last-child {
 .work figure img {
      width: 100%;
      border-radius: 10%;
+     
 }
 
 .work_text {
@@ -679,6 +680,11 @@ ul.btn li:last-child {
 .work_text:hover {
      opacity: 1;
      transition: ease-in all 0.5s;
+}
+
+.col-md-6:hover .work figure img{
+     filter: blur(1px);
+     transition: 0.5s ease-in-out;
 }
 
 .work_text h3 {

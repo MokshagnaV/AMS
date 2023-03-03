@@ -6,10 +6,12 @@ from main.models import Owner, Association
 from django.db.models import Sum
 from django.utils import timezone
 import datetime
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":"May", "06": "June", "07": "July", "08":"August", "09": "September","10":"October","11":"November", "12": "December"}
 
+@login_required(login_url='main')
 def notice_add(request):
     if request.method == 'POST':
         form = request.POST['notices']
@@ -24,15 +26,18 @@ def notice_add(request):
     
     return render(request, 'association/noticesadd.html')
 
+@login_required(login_url='main')
 def index(request):
     return render(request, 'association/index.html')
 
+@login_required(login_url='main')
 def complaints(request):
     complaints = Complaint.objects.all().order_by('-id')
     return render(request, 'association/complaints.html', {
         "complaints": complaints 
     })
 
+@login_required(login_url='main')
 def ledger(request):
     if request.method == 'POST':
         form = request.POST['submit']
@@ -87,6 +92,7 @@ def ledger(request):
         "expenditure": totalExpenditure,
     }) 
 
+@login_required(login_url='main')
 def addexpense(request):
     if request.method == 'POST':
         form = request.POST['submit']
@@ -103,6 +109,7 @@ def addexpense(request):
         return render(request, 'association/addexpense.html')
     return render(request, 'association/addexpense.html')
 
+@login_required(login_url='main')
 def payments(request):
     if request.method == 'POST':
         form = request.POST['submit']
@@ -125,6 +132,7 @@ def payments(request):
         "payments": payments
     })
 
+@login_required(login_url='main')
 def complaint_resolve(request, id):
 
     complaint = Complaint.objects.filter(id = id)

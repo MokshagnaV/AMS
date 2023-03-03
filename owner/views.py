@@ -5,13 +5,14 @@ from main.models import Owner, Association
 from django.db.models import Sum
 from django.utils import timezone
 import datetime
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 months = {"01": "January", "02": "February", "03": "March", "04": "April", "05": "May", "06": "June",
           "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December"}
 
-
+@login_required(login_url='main')
 def index(request):
     notices = Notice.objects.all().order_by("-id")
     user = Owner.objects.get(username=request.session.get('uname'))
@@ -22,6 +23,7 @@ def index(request):
     })
 
 
+@login_required(login_url='main')
 def post_complaints(request):
     if request.method == 'POST':
         form = request.POST['submit']
@@ -35,6 +37,7 @@ def post_complaints(request):
     return render(request, 'owner/postcomplaints.html')
 
 
+@login_required(login_url='main')
 def ledger(request):
     if request.method == 'POST':
         form = request.POST['submit']
@@ -107,6 +110,7 @@ def ledger(request):
     })
 
 
+@login_required(login_url='main')
 def make_payment(request):
     if request.method == 'POST':
         form = request.POST['submit']

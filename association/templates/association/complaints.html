@@ -6,22 +6,14 @@
 {% endblock title %}
 
 {% block cssfiles %}
-    <link rel="stylesheet" href="{% static 'association/complaints.css' %}">
+    <link rel="stylesheet" href="{% static 'includes/complaints.css' %}">
 {% endblock cssfiles %}
 
 {% block body %}
     <main>
-        <h1>All Complaints</h1>
-        <div class="complaints">
-            {% for complaint in complaints %}
-                <div class="complaint">
-                    <h2> {{ complaint.complaint_desc }} </h2>
-                    <p>By {{ complaint.complaint_by | title }} {{ complaint.issued_date }}</p>
-                    {% if complaint.resolved_date %}
-                        <span>Resolved</span>
-                    {% endif %}
-                </div>
-            {% endfor %}
+        <div class="complaints-section">
+            <h1>All Complaints</h1>
+            <div class="complaints">{% include 'includes/complaints.html' %}</div>
         </div>
     </main>
 {% endblock body %}

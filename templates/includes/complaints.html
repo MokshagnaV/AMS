@@ -1,0 +1,11 @@
+<div class="complaints">
+    {% for complaint in complaints %}
+        <div class="complaint">
+            <h2> {{ complaint.complaint_desc }} </h2>
+            <p>Posted on: {{ complaint.issued_date }}</p>
+            {% if complaint.resolved_date %}
+                <span>Resolved</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

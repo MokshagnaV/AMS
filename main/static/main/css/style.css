@@ -381,7 +381,8 @@ ul.btn li:last-child {
 /** banner section **/
 
 .banner_main {
-     background: url(../images/banner.jpg);
+     background: url(../images/apart.jpeg);
+     mask-image: url();
      background-repeat: no-repeat;
      min-height: 700px;
      background-size: 100% 100%;
@@ -650,6 +651,7 @@ ul.btn li:last-child {
 
 .work figure img {
      width: 100%;
+     border-radius: 10%;
 }
 
 .work_text {

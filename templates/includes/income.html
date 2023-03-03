@@ -1,0 +1,41 @@
+{% if expenditures %}
+<div class="income">
+    <table>
+        <tbody>
+            <tr>
+                <td>Opening Balanace</td>
+                <td id="openbalance">{{ open_bal }}</td>
+            </tr>
+            <tr>
+                <td>Maintenance Bills</td>
+                <td id="main-bill">{{ maintenance.amount__sum }}</td>
+            </tr>
+            <tr>
+                <td>Function Hall Bills</td>
+                <td id="fun-bill" >{% if function_hall.amount__sum %} {{ function_hall.amount__sum }} {% else %} - {% endif %}</td>
+            </tr>
+            {% if other.amount__sum %}
+            <tr>
+                <td>Other Bills</td>
+                <td id="other-bill" >{{other.amount__sum}} </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td></td>
+                <td id="totalbalance" ></td>
+            </tr>
+            <tr>
+                <td>Expenditure</td>
+                <td id="expenditure">{{expenditure.amount__sum}}</td>
+            </tr>
+            <tr>
+                <td> Current Balance</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No Income for selected month</p>
+
+{% endif %}

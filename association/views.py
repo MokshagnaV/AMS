@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from owner.models import Notice
-from .models import Complaint, Expenditure, Payment
+from .models import Complaint, Expenditure, Payment, BankBalance
 from django.urls import reverse
 from main.models import Owner, Association
+from django.db.models import Sum
+from django.utils import timezone
 import datetime
 # Create your views here.
 
@@ -38,12 +40,25 @@ def ledger(request):
             month = request.POST['month']
             year = request.POST['year']
             expenditures = Expenditure.objects.filter(month__year= year , month__month= month)
+            totalExpenditure = expenditures.aggregate(Sum('amount'))
+            try:
+                opening_balance = BankBalance.objects.get(month__month = int(month) - 1, month__year = year).balance
+            except:
+                opening_balance = False
+            maintenace = Payment.objects.filter(payment_for = 'MB', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
+            function_hall = Payment.objects.filter(payment_for = 'FH', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
+            others = Payment.objects.filter(payment_for = 'OB', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
             month = months[month]
             return render(request, 'association/ledger.html', {
                 "months":months,
                 "month": month,
                 "year": year,
-                "expenditures": expenditures
+                "expenditures": expenditures,
+                "open_bal": opening_balance,
+                "maintenance": maintenace,
+                "function_hall": function_hall,
+                "other": others,
+                "expenditure": totalExpenditure,
             })
         
         return redirect('association-ledger')
@@ -56,12 +71,20 @@ def ledger(request):
         year -= 1
 
     expenditures = Expenditure.objects.filter(month__year= year , month__month= month)
-
+    totalExpenditure = expenditures.aggregate(Sum('amount'))
+    try:
+        opening_balance = BankBalance.objects.get(month__month = int(month) - 1, month__year = year).balance
+    except:
+        opening_balance = False
+    maintenace = Payment.objects.filter(payment_for = 'MB', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
     return render(request, 'association/ledger.html',{
         "months":months,
         "month": months[month],
         "year": year,
-        "expenditures": expenditures
+        "expenditures": expenditures,
+        "open_bal": opening_balance,
+        "maintenance": maintenace,
+        "expenditure": totalExpenditure,
     }) 
 
 def addexpense(request):
@@ -86,9 +109,7 @@ def payments(request):
         if form == 'get':
             month = request.POST['month']
             year = request.POST['year']
-            print(month +" "+year)
             month_payments = Payment.objects.filter(payment_date__year= year , payment_date__month= month)
-            print(month_payments)
             month = months[month]
             return render(request, 'association/payments.html', {
                 "months":months,
@@ -103,3 +124,10 @@ def payments(request):
         "months":months,
         "payments": payments
     })
+
+def complaint_resolve(request, id):
+
+    complaint = Complaint.objects.filter(id = id)
+    complaint.update(resolved_date = timezone.now()) 
+
+    return redirect('complaints')

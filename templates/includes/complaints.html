@@ -6,6 +6,11 @@
             {% if complaint.resolved_date %}
                 <span>Resolved</span>
             {% endif %}
+
+            {% if association %}
+            <a href="{% url 'complaint-resolve' id=complaint.id %}"><input type="button" name="resolve" value="Resolved"></a>
+            {% endif %}
+
         </div>
     {% endfor %}
 </div>

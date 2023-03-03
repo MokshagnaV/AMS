@@ -13,7 +13,8 @@
     <main>
         <div class="complaints-section">
             <h1>All Complaints</h1>
-            <div class="complaints">{% include 'includes/complaints.html' %}</div>
+            <div class="complaints">{% include 'includes/complaints.html' with association=True %}
+            </div>
         </div>
     </main>
 {% endblock body %}

@@ -21,7 +21,7 @@
 {% if month_payments %}
 
     {% for payment in month_payments %}
-    <div class="payment">
+    <div class="payment" style="box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.33);">
         <p>{{ payment.payment_desc}} </p>
         <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
         <p>UTR: {{ payment.UTR }} </p>
@@ -35,10 +35,10 @@
 
 <div class="payments">
     {% for payment in payments %}
-    <div class="payment">
+    <div class="payment" style="box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.33);">
         <p>{{ payment.payment_desc}} </p>
         <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
-        <p>UTR: {{ payment.UTR }} </p>
+        <p>UTR: {{ payment.UTR }} , Reciept No: {{ payment.reciept_no }} </p>
         <p> {{ payment.payment_date}} </p>
     </div>
     {% endfor %}

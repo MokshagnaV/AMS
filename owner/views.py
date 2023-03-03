@@ -70,9 +70,10 @@ def make_payment(request):
             payment_mode = request.POST['payment_mode']
             payment_desc = request.POST['payment_desc']
             utr = request.POST['utr']
+            reciept_no = request.POST['reciept_no']
             user = Owner.objects.get(username = request.session.get('uname'))
             
-            Payment.objects.create(user = user, payment_desc = payment_desc, payment_mode = payment_mode, UTR = utr, payment_date = timezone.now(), amount = amount)
+            Payment.objects.create(user = user, reciept_no = reciept_no, payment_desc = payment_desc, payment_mode = payment_mode, UTR = utr, payment_date = timezone.now(), amount = amount)
             return redirect('owner-home')
         return render(request, 'owner/makepayment.html')
     

@@ -22,6 +22,7 @@ class Payment(models.Model):
     user = models.ForeignKey('main.Owner', on_delete=models.CASCADE)
     payment_desc = models.CharField(max_length=500)
     payment_mode = models.CharField(max_length = 100)
+    reciept_no = models.CharField(max_length=10, null = True)
     UTR = models.CharField(max_length=100, null=True)
     payment_date = models.DateTimeField()
     amount = models.IntegerField(null=True)

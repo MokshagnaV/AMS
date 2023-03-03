@@ -14,8 +14,11 @@ def login(request):
     
 def index(request):
     notices = Notice.objects.all().order_by("-id")
+    user = Owner.objects.get(username = request.session.get('uname'))
+    complaints = Complaint.objects.filter(complaint_by = user)
     return render(request, 'owner/index.html', {
         "notices": notices,
+        "complaints": complaints,
     })
 
 def post_complaints(request):

@@ -1,5 +1,38 @@
 {% if expenditures %}
-<table>
+
+<div id="wrapper">
+    <h1 id="heading">Expenditure</h1>
+    
+    <table id="keywords" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+           <th><span>S.NO</span></th>
+           <th><span>Purpose</span></th>
+          <th><span>Date</span></th>
+          <th><span>Price</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for expense in expenditures %}
+        <tr>
+            <td>6,000</td>
+            <td class="lalign">{{expense.item}}</td>
+          <td>110</td>
+          <td>{{expense.amount}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+   </div> 
+{% else %}
+
+<p>No Expenditure for selected month</p>
+
+{% endif %}
+
+
+<!-- 
+    <table>
     <thead>
         <tr>
             <th>Expense</th>
@@ -15,8 +48,6 @@
         {% endfor %}
     </tbody>
 </table>
-{% else %}
 
-<p>No Expenditure for selected month</p>
-
-{% endif %}
+     
+ -->

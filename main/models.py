@@ -58,10 +58,10 @@ class OwnerProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     email = models.EmailField(unique=True, null=True)
     OwnerName=models.CharField(max_length=100, null=True)
-    OwnerAddress = models.CharField(max_length=200, null=True)
-    OwnerpNo = models.IntegerField( null=True)
+    OwnerPhNo = models.CharField(max_length=13, null=True)
     FlatNo = models.IntegerField( null=True)
-    FloorNo = models.IntegerField( null=True)
+    FloorNo = models.CharField(max_length=4, null=True)
+    ProfilePic = models.ImageField(upload_to="owner/dps", null=True)
 #------------------------------------------------------------------
 
 class AssociationManager(BaseUserManager):
@@ -86,8 +86,9 @@ class AssociationProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     email = models.EmailField(unique=True, null=True)
     AssociationName=models.CharField(max_length=100, null=True)
-    AssociationAddress = models.CharField(max_length=200, null=True)
-    AssociationRole = models.CharField(max_length=100)
+    AssociationRole = models.CharField(max_length=20, null=True)
+    AssociationPhNo = models.CharField(max_length=13, null=True)
+    ProfilePic = models.ImageField(upload_to="owner/dps", null=True)
 
 @receiver(post_save, sender=Association)
 def create_user_profile(sender, instance, created, **kwargs):

@@ -1,0 +1,66 @@
+{% extends 'ownerbase.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Profile
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'owner/editprofile.css' %}">
+{% endblock cssfiles  %}
+
+{% block main %}
+<div class="center">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-input">
+            <div class="preview">
+                <img id="pic-preview" >
+            </div>
+            <div>
+                <label for="profile-pic">Upload Image</label>
+                <input type="file" id="profile-pic" name="profile-pic" accept="image/*" onchange="showPreview(event);">
+            </div>
+        
+            <div>
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div>
+                <label for="email">Email </label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div>
+                <label for="phone-num">Phone Number </label>
+                <input type="text" id="phone-num" name="phone-num">
+            </div>
+            <div>
+                <label for="floor-num">Floor Number</label>
+                <select name="floor-num" id="floor-num">
+                    <option value="0">G</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <div>
+                <label for="flat-num">Flat Number</label>
+                <select name="flat-num" id="flat-num">
+                    <option value="1">G01</option>
+                    <option value="2">G02</option>
+                    <option value="3">G03</option>
+                    <option value="4">G04</option>
+                    <option value="5">G05</option>
+                    <option value="6">G06</option>
+                </select>
+            </div>
+        </div>
+        <input type="submit" name="submit" value="Done">
+    </form>
+  </div> 
+  <script src="{% static 'owner/js/editprofile.js' %}" ></script>
+{% endblock main %}

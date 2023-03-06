@@ -15,10 +15,10 @@
       <tbody>
         {% for expense in expenditures %}
         <tr>
-            <td>6,000</td>
+            <td>{{ forloop.counter }}</td>
             <td class="lalign">{{expense.item}}</td>
-          <td>110</td>
-          <td>{{expense.amount}}</td>
+            <td>{{expense.month}}</td>
+            <td>{{expense.amount}}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -49,5 +49,4 @@
     </tbody>
 </table>
 
-     
  -->

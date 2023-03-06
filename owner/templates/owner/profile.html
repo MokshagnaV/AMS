@@ -1,0 +1,22 @@
+{% extends 'ownerbase.html' %}
+
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'owner/profile.css' %}">
+{% endblock cssfiles %}
+
+{% block main %}
+    <a href="{% url 'edit-owner-profile' %}">Edit profile</a>
+    <img src="{% if user.ProfilePic %} {{user.ProfilePic.url}} {% else %} {% static 'main/images/Default_Profile_Picture.png' %} {% endif %}" alt="dp" id="profile-pic">
+    <h1>{{user.OwnerName}}</h1>
+    <p>@{{ user.user }}</p>
+    <p> {{ user.email }} </p>
+    <p>{{ user.OwnerPhNo }} </p>
+    <p>{{user.FlatNo }}</p>
+    <p>{{ user.FloorNo }}</p>
+{% endblock main %}

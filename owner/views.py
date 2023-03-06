@@ -1,21 +1,23 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 from .models import Notice
 from association.models import Complaint, Expenditure, Payment, BankBalance
-from main.models import Owner, Association
+from main.models import Owner, OwnerProfile
 from django.db.models import Sum
 from django.utils import timezone
 import datetime
 from django.contrib.auth.decorators import login_required
+import os
 
 # Create your views here.
 
 months = {"01": "January", "02": "February", "03": "March", "04": "April", "05": "May", "06": "June",
           "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December"}
 
+
 @login_required(login_url='main')
 def index(request):
     notices = Notice.objects.all().order_by("-id")
-    user = Owner.objects.get(username=request.session.get('uname'))
+    user = Owner.objects.get(username=request.user)
     complaints = Complaint.objects.filter(complaint_by=user)
     return render(request, 'owner/index.html', {
         "notices": notices,
@@ -29,7 +31,7 @@ def post_complaints(request):
         form = request.POST['submit']
         if form == 'Post':
             desc = request.POST['complaint_desc']
-            user = Owner.objects.get(username=request.session.get('uname'))
+            user = Owner.objects.get(username=request.user)
             Complaint.objects.create(
                 complaint_by=user, complaint_desc=desc, issued_date=timezone.now())
             return redirect('owner-home')
@@ -60,17 +62,22 @@ def ledger(request):
             others = Payment.objects.filter(
                 payment_for='OB', payment_date__year=year, payment_date__month=month).aggregate(Sum('amount'))
 
+            income = [{"id": "op_bal", "name": "Opening Balance", "amount": opening_balance},
+                      {"id": "main_bill", "name": "Maintenance Bills",
+                          "amount": maintenace['amount__sum']},
+                      {"id": "funhall_bill", "name": "Functional Hall",
+                          "amount": function_hall['amount__sum']},
+                      {"id": "oth_bill", "name": "Other Bills",
+                          "amount": others['amount__sum']},
+                      {"id": "expen", "name": "Expenditure", "amount": totalExpenditure['amount__sum']}]
+
             month = months[month]
             return render(request, 'owner/ledger.html', {
                 "months": months,
                 "month": month,
                 "year": year,
                 "expenditures": expenditures,
-                "open_bal": opening_balance,
-                "maintenance": maintenace,
-                "function_hall": function_hall,
-                "other": others,
-                "expenditure": totalExpenditure,
+                "incomes": income
             })
 
         return redirect('owner-ledger')
@@ -121,11 +128,52 @@ def make_payment(request):
             utr = request.POST['utr']
             reciept_no = request.POST['reciept_no']
             pay_for = request.POST['pay_for']
-            user = Owner.objects.get(username=request.session.get('uname'))
+            user = Owner.objects.get(username=request.user)
 
-            Payment.objects.create(user=user, reciept_no=reciept_no, payment_desc=payment_desc,
-                                   payment_mode=payment_mode, UTR=utr, payment_date=timezone.now(), amount=amount, payment_for=pay_for)
+            Payment.objects.create(
+                user=user,
+                reciept_no=reciept_no,
+                payment_desc=payment_desc,
+                payment_mode=payment_mode,
+                UTR=utr,
+                payment_date=timezone.now(),
+                amount=amount,
+                payment_for=pay_for
+            )
             return redirect('owner-home')
         return render(request, 'owner/makepayment.html')
 
     return render(request, 'owner/makepayment.html')
+
+
+def profile(request):
+    user = OwnerProfile.objects.get(user = request.user)
+    return render(request, 'owner/profile.html', {
+        "user": user,
+    })
+
+
+def editprofile(request):
+    if request.method == 'POST':
+        form = request.POST['submit']
+        if form == 'Done':
+            name = request.POST['name']
+            email = request.POST['email']
+            phno = request.POST['phone-num']
+            floor = request.POST['floor-num']
+            flat = request.POST['flat-num']
+            dp = request.FILES['profile-pic']
+
+            owner = OwnerProfile.objects.get(user = request.user)
+            if owner.ProfilePic is not None:
+                os.remove(owner.ProfilePic.path)
+            owner.email = email
+            owner.OwnerName = name
+            owner.OwnerPhNo = phno
+            owner.FloorNo = floor
+            owner.FlatNo = flat
+            owner.ProfilePic = dp
+            owner.save()
+            return redirect('owner-profile')
+
+    return render(request, 'owner/editprofile.html')

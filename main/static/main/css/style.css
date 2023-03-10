@@ -645,12 +645,16 @@ ul.btn li:last-child {
      padding-top: 20px;
 }
 
+.work{
+}
+
 .work figure {
      margin: 0;
 }
 
 .work figure img {
-     width: 100%;
+     aspect-ratio: 4/3;
+     object-fit: cover;
      border-radius: 10%;
      
 }

@@ -14,7 +14,7 @@ const getOptions = (floor) => {
   flat.innerHTML = "";
   for (let i = 1; i < 7; i++) {
     const option = document.createElement("option");
-    option.setAttribute("value", `${floor_num}0${i}`);
+    option.setAttribute("value", `${floor.value}0${i}`);
     option.appendChild(document.createTextNode(`${floor_num}0${i}`));
     flat.appendChild(option);
   }

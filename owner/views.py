@@ -18,10 +18,20 @@ months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":
 def index(request):
     notices = Notice.objects.all().order_by("-id")
     user = Owner.objects.get(username=request.user)
+    username = OwnerProfile.objects.get(user = user)
     complaints = Complaint.objects.filter(complaint_by=user)
+
+    try:
+        Payment.objects.get(user = user, payment_date__month = datetime.date.today().month, payment_for = 'MB')
+        payment = True
+    except:
+        payment = False
+
     return render(request, 'owner/index.html', {
         "notices": notices,
         "complaints": complaints,
+        "user": username,
+        "status": payment,
     })
 
 
@@ -145,15 +155,17 @@ def make_payment(request):
 
     return render(request, 'owner/makepayment.html')
 
-
+@login_required(login_url='main')
 def profile(request):
     user = OwnerProfile.objects.get(user = request.user)
     return render(request, 'owner/profile.html', {
         "user": user,
     })
 
-
+@login_required(login_url='main')
 def editprofile(request):
+    owner = OwnerProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'Done':
@@ -162,18 +174,25 @@ def editprofile(request):
             phno = request.POST['phone-num']
             floor = request.POST['floor-num']
             flat = request.POST['flat-num']
-            dp = request.FILES['profile-pic']
+            # dp = request.FILES['profile-pic']
 
-            owner = OwnerProfile.objects.get(user = request.user)
-            if owner.ProfilePic is not None:
-                os.remove(owner.ProfilePic.path)
+            try:
+                dp = request.FILES['profile-pic']       
+                if owner.ProfilePic != '':
+                    os.remove(owner.ProfilePic.path)
+                    owner.ProfilePic = dp
+                else:
+                    owner.ProfilePic = dp
+            except:
+                pass
             owner.email = email
             owner.OwnerName = name
             owner.OwnerPhNo = phno
             owner.FloorNo = floor
             owner.FlatNo = flat
-            owner.ProfilePic = dp
             owner.save()
             return redirect('owner-profile')
 
-    return render(request, 'owner/editprofile.html')
+    return render(request, 'owner/editprofile.html', {
+        "user": owner,
+    })

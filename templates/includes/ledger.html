@@ -1,0 +1,69 @@
+<div class="ledgerwrap">
+    <div class="form">
+      {% include 'includes/MonYrselector.html' %}
+    </div>
+    
+    <h1 id="heading">Expenditure of {{ month }} {{year}}</h1>
+    
+    <div class="result">
+        {% if expenditures %}
+        
+        <table id="keywords" cellspacing="0" cellpadding="0">
+             <thead>
+               <tr>
+                  <th><span>S.NO</span></th>
+                  <th><span>Purpose</span></th>
+                 <th><span>Date</span></th>
+                 <th><span>Price</span></th>
+               </tr>
+             </thead>
+             <tbody>
+               {% for expense in expenditures %}
+               <tr>
+                   <td>{{ forloop.counter }}</td>
+                   <td class="lalign">{{expense.item}}</td>
+                   <td>{{expense.month}}</td>
+                   <td>{{expense.amount}}</td>
+               </tr>
+               {% endfor %}
+             </tbody>
+           </table>
+        {% else %}
+        
+        <p>No Expenditure for selected month</p>
+        
+        {% endif %}
+    </div>
+    
+    <h1 id="heading">Income of {{ month }} {{year}}</h1>
+    
+    <div class="result">
+        {% if expenditures %}
+        <div class="income">
+            <table id="keywords" cellspacing="0" cellpadding="0">
+                 <thead>
+                   <tr>
+                      <th><span>S.NO</span></th>
+                      <th><span>Purpose</span></th>
+                     <th><span>Price</span></th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   {% for income in incomes %}
+                   <tr>
+                       <td> {{ forloop.counter }}</td>
+                       <td class="lalign"> {{income.name}} </td>
+                       <td id="{{income.id}}">{{ income.amount }}</td>
+                   </tr>
+                   {% endfor %}
+        
+                 </tbody>
+               </table>
+        </div>
+        {% else %}
+        <p>No Income for selected month</p>
+        
+        {% endif %}
+        
+    </div>
+</div>

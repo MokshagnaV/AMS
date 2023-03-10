@@ -73,7 +73,7 @@ def signup(request):
     return render(request, "main/signup.html")
     
 def logoutUser(request):
-    del request.session['uname']  
+    # del request.session['uname']  
     logout(request)
     #messages.info(request, 'Logout successful')
     return redirect('main')

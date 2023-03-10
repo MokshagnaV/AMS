@@ -12,6 +12,7 @@
 
 {% block main %}
     <h1>Owner's Page</h1>
+    <h3>Welcome Back "{{user.OwnerName}}"!</h3>
     <div class="main-content">
         <div class="row">
             <section class="notices-div">
@@ -29,8 +30,8 @@
             </section>
             <section class="payment-status">
                 <h1 class="heading">Payment Status</h1>
-                <div class="status">
-                    <h4>Maintenance Bill Pending</h4>
+                <div class="status {% if status %}done {% else %}pending{% endif %}">
+                    <h4>Maintenance Bill {% if status %}Done {% else %}Pending{% endif %}</h4>
                 </div>
             </section>
             <section class="complaints-section">

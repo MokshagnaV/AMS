@@ -7,38 +7,9 @@
 
 {% block cssfiles %}
 <link rel="stylesheet" href="{% static "includes/expenditure.css" %}">
-    
+<link rel="stylesheet" href="{% static 'includes/ledger.css' %}">
 {% endblock cssfiles %}
 
 {% block main %}
-<form action="" method="post">
-    {% csrf_token %}
-    <select name="month" id="month">
-        {% for num, month in months.items %}
-        <option value="{{num}}">{{month}}</option>
-        {% endfor %}
-    </select>
-    <select name="year" id="year">
-        
-    </select>
-    <input type="submit" value="get" name="submit">
-</form>
-
-<h1>Expenditure of {{ month }} {{year}}</h1>
-
-{% include 'includes/expenditure.html' %}
-
-<h1>Income of {{ month }} {{year}}</h1>
-
-{% include 'includes/income.html' %}
-
-<script>
-    const years = document.querySelector("#year");
-    for(let i = 2010; i < 2040; i++){
-        const option = document.createElement("option");
-        option.setAttribute("value", i);
-        option.appendChild(document.createTextNode(i));
-        years.appendChild(option);
-    }
-</script>
+{% include 'includes/ledger.html' %}
 {% endblock main %}

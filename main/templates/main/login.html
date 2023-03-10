@@ -14,7 +14,9 @@
 	<header>
 		<h1 class="heading">Login Page</h1>
 	</header>
-
+	{% for msg in messages %}
+                {{msg}}
+	{% endfor %}
 	<div class="container">
 		<div class="slider"></div>
 		<div class="btn">

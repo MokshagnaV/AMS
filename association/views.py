@@ -2,14 +2,22 @@ from django.shortcuts import render, redirect
 from owner.models import Notice
 from .models import Complaint, Expenditure, Payment, BankBalance
 from django.urls import reverse
-from main.models import Owner, Association
+from main.models import Association, AssociationProfile
 from django.db.models import Sum
 from django.utils import timezone
 import datetime
 from django.contrib.auth.decorators import login_required
+import os
 # Create your views here.
 
 months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":"May", "06": "June", "07": "July", "08":"August", "09": "September","10":"October","11":"November", "12": "December"}
+
+@login_required(login_url='main')
+def index(request):
+    userName = AssociationProfile.objects.get(user = request.user)
+    return render(request, 'association/index.html', {
+        "user": userName
+    })
 
 @login_required(login_url='main')
 def notice_add(request):
@@ -25,10 +33,6 @@ def notice_add(request):
         return render(request, 'association/noticesadd.html')
     
     return render(request, 'association/noticesadd.html')
-
-@login_required(login_url='main')
-def index(request):
-    return render(request, 'association/index.html')
 
 @login_required(login_url='main')
 def complaints(request):
@@ -139,3 +143,41 @@ def complaint_resolve(request, id):
     complaint.update(resolved_date = timezone.now()) 
 
     return redirect('complaints')
+
+@login_required(login_url='main')
+def profile(request):
+    user = AssociationProfile.objects.get(user = request.user)
+    return render(request, 'association/profile.html', {
+        "user": user,
+    })
+
+@login_required(login_url='main')
+def editprofile(request):
+    user = AssociationProfile.objects.get(user = request.user)
+
+    if request.method == 'POST':
+        form = request.POST['submit']
+        if form == 'Done':
+            name = request.POST['name']
+            email = request.POST['email']
+            phno = request.POST['phone-num']
+            role = request.POST['role']
+            try:
+                dp = request.FILES['profile-pic']       
+                if user.ProfilePic != '':
+                    os.remove(user.ProfilePic.path)
+                    user.ProfilePic = dp
+                else:
+                    user.ProfilePic = dp
+            except:
+                pass
+            user.email = email
+            user.AssociationName = name
+            user.AssociationPhNo = phno
+            user.AssociationRole = role
+            user.save()
+            return redirect('association-profile')
+
+    return render(request, 'association/editprofile.html', {
+        "user": user,
+    })

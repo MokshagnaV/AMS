@@ -1,4 +1,4 @@
-{% extends 'ownerbase.html' %}
+{% extends 'associationbase.html' %}
 
 {% load static %}
 
@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="{% static 'owner/profile.css' %}">
 {% endblock cssfiles %}
 
-{% block main %}
-    <a href="{% url 'edit-owner-profile' %}">Edit profile</a>
+{% block body %}
+    <a href="{% url 'edit-association-profile' %}">Edit profile</a>
     <img src="{% if user.ProfilePic %} {{user.ProfilePic.url}} {% else %} {% static 'main/images/Default_Profile_Picture.png' %} {% endif %}" alt="dp" id="profile-pic">
-    <h1>Name: {{user.OwnerName}}</h1>
+    <h1>Name: {{user.AssociationName}}</h1>
     <p>  @{{ user.user }}</p>
+    <p><b>Role: </b> {{user.AssociationRole}}</p>
     <p><b>Email: </b> {{ user.email }} </p>
-    <p><b>Contact: </b>{{ user.OwnerPhNo }} </p>
-    <p><b>Floor Number: </b>  {{ user.FloorNo }}</p>
-    <p><b>Flat Number: </b>  {{user.FlatNo }}</p>
-{% endblock main %}
+    <p><b>Contact: </b>{{ user.AssociationPhNo }} </p>
+    
+{% endblock body %}

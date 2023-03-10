@@ -67,14 +67,14 @@ img { border: 0; max-width: 100%; }
 #wrapper {
   display: block;
   width: 850px;
-  background: rgb(1, 12, 15);
+  /* background: rgb(1, 12, 15); */
   margin: 0 auto;
   padding: 10px 17px;
-  box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.35); /* -webkit- */
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.35); -webkit- */
 }
 
 #keywords {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0 auto;
   font-size: .8em;
   margin-bottom: 15px;
@@ -120,5 +120,5 @@ img { border: 0; max-width: 100%; }
   text-align: left;
 }
 #heading{
-    color: #acc8dd;
-}
+    color: #003f6e;
+  }

@@ -15,7 +15,7 @@
         {% csrf_token %}
         <div class="form-input">
             <div class="preview">
-                <img id="pic-preview" >
+                <img id="pic-preview" {% if user.ProfilePic %} src="{{user.ProfilePic.url}}" {% endif %}>
             </div>
             <div>
                 <label for="profile-pic">Upload Image</label>
@@ -24,22 +24,23 @@
         
             <div>
                 <label for="name">Full Name</label>
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name" {% if user.OwnerName %}value="{{user.OwnerName}}"{% endif %} >
             </div>
             <div>
                 <label for="email">Email </label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email" {% if user.email %}value="{{user.email}}"{% endif %} >
             </div>
             <div>
                 <label for="phone-num">Phone Number </label>
-                <input type="text" id="phone-num" name="phone-num">
+                <input type="text" id="phone-num" name="phone-num"{% if user.OwnerPhNo %} value="{{user.OwnerPhNo}}"{% endif %}>
             </div>
             <div>
                 <label for="floor-num">Floor Number</label>
-                <select name="floor-num" id="floor-num">
+                <select name="floor-num" id="floor-num" value="{{user.FloorNo}}">
                     <option value="0">G</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
+                    {% if FloorNo %} <option value="{{user.FloorNo}}" selected>{{user.FloorNo}}</option> {% endif %}
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
@@ -50,6 +51,7 @@
             <div>
                 <label for="flat-num">Flat Number</label>
                 <select name="flat-num" id="flat-num">
+                    {% if user.FlatNo %}<option value="{{user.FlatNo}}">{{user.FlatNo}}</option>{% endif %} 
                     <option value="1">G01</option>
                     <option value="2">G02</option>
                     <option value="3">G03</option>

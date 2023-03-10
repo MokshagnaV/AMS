@@ -5,53 +5,42 @@
     Ledger
 {% endblock title %}
 
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'association/payments.css' %}">
+{% endblock cssfiles %}
+
 {% block body %}
-<form action="" method="post">
-    {% csrf_token %}
-    <select name="month" id="month">
-        {% for num, month in months.items %}
-        <option value="{{num}}">{{month}}</option>
-        {% endfor %}
-    </select>
-    <select name="year" id="year">
-    </select>
-    <input type="submit" value="get" name="submit">
-</form>
-
-{% if month_payments %}
-
-    {% for payment in month_payments %}
-    <div class="payment" style="box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.33);">
-        <p>{{ payment.payment_desc}} </p>
-        <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
-        <p>UTR: {{ payment.UTR }} </p>
-        <p> {{ payment.payment_date}} </p>
+<div class="paymentwrap">
+    <div class="form">
+        {% include 'includes/MonYrselector.html' %}
     </div>
-    {% endfor %}
-
-{% else %}
-
-<h1>All Payments</h1>
-
-<div class="payments">
-    {% for payment in payments %}
-    <div class="payment" style="box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.33);">
-        <p>{{ payment.payment_desc}} </p>
-        <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
-        <p>UTR: {{ payment.UTR }} , Reciept No: {{ payment.reciept_no }} </p>
-        <p> {{ payment.payment_date}} </p>
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
     
-    <script>
-        const years = document.querySelector("#year");
-        for(let i = 2010; i < 2040; i++){
-        const option = document.createElement("option");
-        option.setAttribute("value", i);
-        option.appendChild(document.createTextNode(i));
-        years.appendChild(option);
-    }
-</script>
+    {% if month_payments %}
+    
+        {% for payment in month_payments %}
+        <div class="payment">
+            <p>{{ payment.payment_desc}} </p>
+            <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
+            <p>UTR: {{ payment.UTR }} </p>
+            <p> {{ payment.payment_date}} </p>
+        </div>
+        {% endfor %}
+    
+    {% else %}
+    
+    <h1>All Payments</h1>
+    
+    <div class="payments">
+        {% for payment in payments %}
+        <div class="payment">
+            <p>{{ payment.payment_desc}} </p>
+            <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
+            <p>UTR: {{ payment.UTR }} , Reciept No: {{ payment.reciept_no }} </p>
+            <p> {{ payment.payment_date}} </p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+</div>
 {% endblock body %}

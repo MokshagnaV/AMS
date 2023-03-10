@@ -1,0 +1,46 @@
+{% extends 'associationbase.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Profile
+{% endblock title %}
+
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'association/editprofile.css' %}">
+{% endblock cssfiles  %}
+
+{% block body %}
+<div class="center">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-input">
+            <div class="preview">
+                <img id="pic-preview" {% if user.ProfilePic %} src="{{user.ProfilePic.url}}" {% endif %}>
+            </div>
+            <div>
+                <label for="profile-pic">Upload Image</label>
+                <input type="file" id="profile-pic" name="profile-pic" accept="image/*" onchange="showPreview(event);">
+            </div>
+        
+            <div>
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" {% if user.AssociationName %}value="{{user.AssociationName}}"{% endif %} >
+            </div>
+            <div>
+                <label for="email">Email </label>
+                <input type="text" id="email" name="email" {% if user.email %}value="{{user.email}}"{% endif %} >
+            </div>
+            <div>
+                <label for="phone-num">Phone Number </label>
+                <input type="text" id="phone-num" name="phone-num"{% if user.AssociationPhNo %} value="{{user.AssociationPhNo}}"{% endif %}>
+            </div>
+            <div>
+                <label for="role">Role</label>
+                <input type="text" id="role" name="role" {% if user.AssociationRole %}value="{{user.AssociationRole}}"{% endif %}>
+            </div>
+        </div>
+        <input type="submit" name="submit" value="Done">
+    </form>
+  </div> 
+  <script src="{% static 'association/editprofile.js' %}" ></script>
+{% endblock body %}

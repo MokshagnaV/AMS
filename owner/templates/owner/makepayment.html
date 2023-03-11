@@ -10,36 +10,38 @@
 {% endblock cssfiles %}
 
 {% block main %}
-<div class="card">
-    <h1>Enter Payment Details </h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="formdiv">
-            <label for="amount">Amount</label>
-            <input type="number" name="amount", id="amount
-            ">
-            <label for="payment_mode"> Payment Mode </label>
-            <select name="payment_mode" id="payment_mode">
-                <option value="ON">Online</option>
-                <option value="OF">Offline</option>
-            </select>
-            <label for="pay_for">Payment For</label>
-            <select name="pay_for" id="pay_for">
-                <option value="MB">Maintenance Bill</option>
-                <option value="FH">Function Hall</option>
-                <option value="OB"> Other Bill</option>
-            </select>
-            <label for="payment_desc" id="pay_desc">Payment Description </label>
-            <textarea name="payment_desc" id="desc" cols="30" rows="10"></textarea>
-            <label for="reciept_no">Reciept No </label>
-            <input type="text" name="reciept_no" id="reciept_no">
-            <label for="utr" id="utr_label"> UTR </label>
-            <input type="text" name="utr" id="utr">
-            <input type="submit" id="submit" value="Done" class="submit button" name="submit"/>
-            <input type="reset">
-        </div>
-    </form>
-
-    <script src="{% static 'owner/js/makepayment.js' %}"></script>
+<div class="main-wrap">
+    <div class="card">
+        <h1>Enter Payment Details </h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="formdiv">
+                <label for="amount">Amount</label>
+                <input type="number" name="amount", id="amount
+                ">
+                <label for="payment_mode"> Payment Mode </label>
+                <select name="payment_mode" id="payment_mode">
+                    <option value="ON">Online</option>
+                    <option value="OF">Offline</option>
+                </select>
+                <label for="pay_for">Payment For</label>
+                <select name="pay_for" id="pay_for">
+                    <option value="MB">Maintenance Bill</option>
+                    <option value="FH">Function Hall</option>
+                    <option value="OB"> Other Bill</option>
+                </select>
+                <label for="payment_desc" id="pay_desc">Payment Description </label>
+                <textarea name="payment_desc" id="desc" cols="30" rows="10"></textarea>
+                <label for="reciept_no">Reciept No </label>
+                <input type="text" name="reciept_no" id="reciept_no">
+                <label for="utr" id="utr_label"> UTR </label>
+                <input type="text" name="utr" id="utr">
+                <input type="submit" id="submit" value="Done" class="submit button" name="submit"/>
+                <input type="reset">
+            </div>
+        </form>
+    
+        <script src="{% static 'owner/js/makepayment.js' %}"></script>
+    </div>
 </div>
 {% endblock main %}

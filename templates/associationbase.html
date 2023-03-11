@@ -2,17 +2,116 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} {% endblock title %}</title>
-    <link rel="icon" type="image/x-icon" href="{% static '/media/logo.png' %}">
-    <link rel="stylesheet" href="{% static 'css/associationbase.css' %}">
-    {% block cssfiles %}{% endblock cssfiles %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% block title %} {% endblock title %}</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'owner/template/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" href="{% static 'owner/template/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'owner/template/vendors/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'owner/template/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+  <link rel="stylesheet" href="{% static 'owner/template/vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'owner/template/js/select.dataTables.min.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'owner/template/css/vertical-layout-light/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static '/media/logo.png' %}" />
+
+  <link rel="stylesheet" href="{% static 'owner/template/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static "css/ownerbase.css" %}">
+
+  {% block cssfiles %} {% endblock cssfiles %}
 </head>
-<body>
-    {% block body %}
-    {% endblock body %}
+<body class="sidebar-icon-only">
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="{% url 'association-home' %}"><img src="{% static 'owner/template/images/logo.svg' %}" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="{% url 'association-home' %}"><img src="{% static 'owner/template/images/logo-mini.svg' %}" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="{% if user.ProfilePic %} {{user.ProfilePic.url}} {% else %} {% static 'main/images/Default_Profile_Picture.png' %} {% endif %}" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a href="{% url 'association-profile' %}" class="dropdown-item">
+                <i class="mdi mdi-account-circle"></i>
+                My Profile
+              </a>
+              <a href="{% url 'logout' %}" class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+     
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+
+      
+      {% include 'includes/association/association_sidebar.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="main">
+          {% block main %}
+          
+          {% endblock main %}
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        {% include 'includes/owner/owner_footer.html' %}
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="{% static 'owner/template/vendors/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{% static 'owner/template/vendors/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'owner/template/vendors/datatables.net/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'owner/template/vendors/datatables.net-bs4/dataTables.bootstrap4.js' %}"></script>
+  <script src="{% static 'owner/template/js/dataTables.select.min.js' %}"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="{% static 'owner/template/js/off-canvas.js' %}"></script>
+  <script src="{% static 'owner/template/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'owner/template/js/template.js' %}"></script>
+  <script src="{% static 'owner/template/js/settings.js' %}"></script>
+  <script src="{% static 'owner/template/js/todolist.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'owner/template/js/dashboard.js' %}"></script>
+  <script src="{% static 'owner/template/js/Chart.roundedBarCharts.js' %}"></script>
+  <!-- End custom js for this page-->
 </body>
+
 </html>
+

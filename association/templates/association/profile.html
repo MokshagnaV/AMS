@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'owner/profile.css' %}">
 {% endblock cssfiles %}
 
-{% block body %}
+{% block main %}
     <a href="{% url 'edit-association-profile' %}">Edit profile</a>
     <img src="{% if user.ProfilePic %} {{user.ProfilePic.url}} {% else %} {% static 'main/images/Default_Profile_Picture.png' %} {% endif %}" alt="dp" id="profile-pic">
     <h1>Name: {{user.AssociationName}}</h1>
@@ -19,4 +19,4 @@
     <p><b>Email: </b> {{ user.email }} </p>
     <p><b>Contact: </b>{{ user.AssociationPhNo }} </p>
     
-{% endblock body %}
+{% endblock main %}

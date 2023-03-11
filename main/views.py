@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Owner, Association
+from .models import Owner, Association, OwnerProfile, AssociationProfile
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 # Create your views here.
@@ -59,16 +59,30 @@ def signup(request):
         form=request.POST['submit']
         if form=='Submit':
             username = request.POST['username']
-            email = request.POST['email']
             password = request.POST['pass']
             usertype = request.POST['user_type']
+            email = request.POST['email']
+            name = request.POST['fname']
+            phnum = request.POST['phnumber']
             
             if usertype == 'Owner' :
                 Owner.objects.create_user(username = username, password = password)
-                
+                user = OwnerProfile.objects.get(user = Owner.objects.get(username = username))
+                user.OwnerName = name
+                user.email = email
+                user.OwnerPhNo = phnum
+                user.save()
+                return redirect('main-login')
 
             elif usertype == 'Association':
                 Association.objects.create_user(username = username, password = password)
+                user = AssociationProfile.objects.get(user = Association.objects.get(username = username))
+                user.AssociationName = name
+                user.email = email
+                user.AssociationPhNo = phnum
+                user.save()
+                return redirect('main-login')
+
                 
     return render(request, "main/signup.html")
     

@@ -21,28 +21,36 @@ def index(request):
 
 @login_required(login_url='main')
 def notice_add(request):
+    username = AssociationProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['notices']
         if form == 'Add':
             notice_title = request.POST['notice-title']
             desc = request.POST['desc']
-            user = Association.objects.get(username = request.session.get('uname'))
-
+            user = Association.objects.get(username = request.user)
+            username = AssociationProfile.objects.get(user = user)
             Notice.objects.create(notice_by=user,notice_title=notice_title, notice_desc=desc)
-            return render(request, 'association/index.html')
-        return render(request, 'association/noticesadd.html')
+            return redirect('association-home')
+        return redirect('notices_add')
     
-    return render(request, 'association/noticesadd.html')
+    return render(request, 'association/noticesadd.html', {
+        "user": username
+    })
 
 @login_required(login_url='main')
 def complaints(request):
     complaints = Complaint.objects.all().order_by('-id')
+    username = AssociationProfile.objects.get(user = request.user)
     return render(request, 'association/complaints.html', {
-        "complaints": complaints 
+        "complaints": complaints ,
+        "user": username
     })
 
 @login_required(login_url='main')
 def ledger(request):
+    username = AssociationProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'get':
@@ -94,10 +102,13 @@ def ledger(request):
         "open_bal": opening_balance,
         "maintenance": maintenace,
         "expenditure": totalExpenditure,
+        "user": username
     }) 
 
 @login_required(login_url='main')
 def addexpense(request):
+    username = AssociationProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'submit':
@@ -110,11 +121,15 @@ def addexpense(request):
             except(Exception):
                 pass
             return redirect(reverse('association-ledger'))
-        return render(request, 'association/addexpense.html')
-    return render(request, 'association/addexpense.html')
+        return redirect('addexpense')
+    return render(request, 'association/addexpense.html', {
+        "user": username
+    })
 
 @login_required(login_url='main')
 def payments(request):
+    username = AssociationProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'get':
@@ -133,7 +148,8 @@ def payments(request):
     payments = Payment.objects.all()
     return render(request, 'association/payments.html',{
         "months":months,
-        "payments": payments
+        "payments": payments,
+        "user": username
     })
 
 @login_required(login_url='main')

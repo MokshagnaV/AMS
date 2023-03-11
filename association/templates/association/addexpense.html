@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'association/addexpense.css' %}">
 {% endblock cssfiles %}
 
-{% block body %}
+{% block main %}
 <form action="" method="post" enctype="multipart/form-data">
             <div class="main-form">
             {% csrf_token %}
@@ -30,5 +30,5 @@
         </div>
         </form>
     <script src="{% static 'association/addexpense.js' %}"></script>
-{% endblock body %}
+{% endblock main %}
 

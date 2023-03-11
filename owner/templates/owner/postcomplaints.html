@@ -10,15 +10,17 @@
 {% endblock cssfiles %}
 
 {% block main %}
-    <div class="card">
-        <h1>Post your Complaints</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            <div class="formdiv">
-                <textarea name="complaint_desc" id="desc" cols="30" rows="10"></textarea>
-                <input type="submit" id="submit" value="Post" class="submit button" name="submit"/>
-                <input type="reset">
-            </div>
-        </form>
+    <div class="main-wrap">
+        <div class="card">
+            <h1>Post your Complaints</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="formdiv">
+                    <textarea name="complaint_desc" id="desc" cols="30" rows="10"></textarea>
+                    <input type="submit" id="submit" value="Post" class="submit button" name="submit"/>
+                    <input type="reset">
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock main %}

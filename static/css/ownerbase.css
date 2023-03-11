@@ -1,38 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+.nav-link {
+  min-width: 70px;
+}
+.main-panel {
+  min-height: 100%;
+  display: flex;
+}
+.main {
+  flex: 1;
+  background-color: #f5f7ff;
+}
+.main-wrap {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* remove default spacing */
-/* force styling of type through styling, rather than elements */
-
-* {
-    margin: 0;
-    padding: 0;
-    /* font: inherit; */
-}
-
-
-/* min body height */
-
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-    background-color: #E9F8F9;
-}
-
-/* responsive images/videos */
-img,
-picture,
-svg,
-video {
-    display: block;
-    max-width: 100%;
-}
-
-main{
-    padding: 2rem;
+@media (max-width: 991px) {
+  .main-panel {
+    min-height: 100%;
+    display: flex;
+  }
 }

@@ -19,7 +19,8 @@ def index(request):
     notices = Notice.objects.all().order_by("-id")
     user = Owner.objects.get(username=request.user)
     username = OwnerProfile.objects.get(user = user)
-    complaints = Complaint.objects.filter(complaint_by=user)
+    complaints = Complaint.objects.filter(complaint_by=user).order_by("-id")
+    payments = Payment.objects.filter(user = user)
 
     try:
         Payment.objects.get(user = user, payment_date__month = datetime.date.today().month, payment_for = 'MB')
@@ -31,12 +32,14 @@ def index(request):
         "notices": notices,
         "complaints": complaints,
         "user": username,
-        "status": payment,
+        "payments": payments,
     })
 
 
 @login_required(login_url='main')
 def post_complaints(request):
+    username = OwnerProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'Post':
@@ -45,12 +48,16 @@ def post_complaints(request):
             Complaint.objects.create(
                 complaint_by=user, complaint_desc=desc, issued_date=timezone.now())
             return redirect('owner-home')
-        return render(request, 'owner/postcomplaints.html')
-    return render(request, 'owner/postcomplaints.html')
+        return redirect('post-complaints')
+    return render(request, 'owner/postcomplaints.html', {
+        "user": username,
+    })
 
 
 @login_required(login_url='main')
 def ledger(request):
+    username = OwnerProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'get':
@@ -87,6 +94,7 @@ def ledger(request):
                 "month": month,
                 "year": year,
                 "expenditures": expenditures,
+                "user": username,
                 "incomes": income
             })
 
@@ -124,11 +132,14 @@ def ledger(request):
         "function_hall": function_hall,
         "other": others,
         "expenditure": totalExpenditure,
+        "user": username,
     })
 
 
 @login_required(login_url='main')
 def make_payment(request):
+    username = OwnerProfile.objects.get(user = request.user)
+
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'Done':
@@ -151,9 +162,11 @@ def make_payment(request):
                 payment_for=pay_for
             )
             return redirect('owner-home')
-        return render(request, 'owner/makepayment.html')
+        return redirect('make-payment')
 
-    return render(request, 'owner/makepayment.html')
+    return render(request, 'owner/makepayment.html', {
+        "user": username
+    })
 
 @login_required(login_url='main')
 def profile(request):

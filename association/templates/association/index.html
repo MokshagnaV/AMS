@@ -4,15 +4,7 @@
     Association 
 {% endblock title %}
 
-{% block body %}
+{% block main %}
     <h1>Association Page</h1>
     <h3>Welcome Back "{{user.AssociationName}}"!</h3>
-    <nav>
-        <a href="{% url 'association-profile' %}">Profile</a>
-        <a href="{% url 'notices_add' %}">Add Notices</a>
-        <a href="{% url 'complaints' %}">View complaints</a>
-        <a href="{% url 'association-ledger' %}">Ledger</a>
-        <a href="{% url 'payments' %}">All Payments</a>
-        <a href="{% url 'logout' %}">Logout</a>
-    </nav>
-{% endblock body %}
+{% endblock main %}

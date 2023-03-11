@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'association/editprofile.css' %}">
 {% endblock cssfiles  %}
 
-{% block body %}
+{% block main %}
 <div class="center">
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -43,4 +43,4 @@
     </form>
   </div> 
   <script src="{% static 'association/editprofile.js' %}" ></script>
-{% endblock body %}
+{% endblock main %}

@@ -1,0 +1,33 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav" style="position: fixed;">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'owner-home' %}">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'owner-ledger' %}" aria-expanded="false" aria-controls="ui-basic">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Ledger</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'make-payment' %}" aria-expanded="false" aria-controls="form-elements">
+        <i class="icon-columns menu-icon"></i>
+        <span class="menu-title">Make Payment</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'post-complaints' %}" aria-expanded="false" aria-controls="charts">
+        <i class="icon-bar-graph menu-icon"></i>
+        <span class="menu-title">Post Complaints</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'owner-profile' %}" aria-expanded="false" aria-controls="tables">
+        <i class="icon-head menu-icon"></i>
+        <span class="menu-title">Profile</span>
+      </a>
+    </li>
+</nav>

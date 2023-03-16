@@ -14,6 +14,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2.375rem;
+}
+
+select.form-control{
+  color: #000;
 }
 
 @media (max-width: 991px) {

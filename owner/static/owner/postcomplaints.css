@@ -25,3 +25,7 @@ a{
 #desc {
     grid-column: 1/span 2;
 }
+
+textarea{
+    resize: vertical;
+}

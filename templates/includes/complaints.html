@@ -3,10 +3,11 @@
         <div class="complaint">
             <h2> {{ complaint.complaint_desc }} </h2>
             <p>Posted on: {{ complaint.issued_date }}</p>
+            <p>Posteed by: {{ complaint.complaint_by }}</p>
             {% if complaint.resolved_date %}
                 <span>Resolved</span>
             {% endif %}
-
+            
             {% if association %}
             <a href="{% url 'complaint-resolve' id=complaint.id %}"><input type="button" name="resolve" value="Resolved"></a>
             {% endif %}

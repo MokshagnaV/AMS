@@ -44,10 +44,9 @@ def complaints(request):
     username = AssociationProfile.objects.get(user = request.user)
     return render(request, 'association/complaints.html', {
         "complaints": complaints ,
-        "user": username
+        "user": username,
     })
 
-@login_required(login_url='main')
 def ledger(request):
     username = AssociationProfile.objects.get(user = request.user)
 
@@ -56,54 +55,78 @@ def ledger(request):
         if form == 'get':
             month = request.POST['month']
             year = request.POST['year']
-            expenditures = Expenditure.objects.filter(month__year= year , month__month= month)
+            expenditures = Expenditure.objects.filter(
+                month__year=year, month__month=month)
+
             totalExpenditure = expenditures.aggregate(Sum('amount'))
             try:
-                opening_balance = BankBalance.objects.get(month__month = int(month) - 1, month__year = year).balance
+                opening_balance = BankBalance.objects.get(
+                    month__month=int(month) - 1, month__year=year).balance
             except:
                 opening_balance = False
-            maintenace = Payment.objects.filter(payment_for = 'MB', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
-            function_hall = Payment.objects.filter(payment_for = 'FH', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
-            others = Payment.objects.filter(payment_for = 'OB', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
+            maintenace = Payment.objects.filter(
+                payment_for='MB', payment_date__year=year, payment_date__month=month).aggregate(Sum('amount'))
+            function_hall = Payment.objects.filter(
+                payment_for='FH', payment_date__year=year, payment_date__month=month).aggregate(Sum('amount'))
+            others = Payment.objects.filter(
+                payment_for='OB', payment_date__year=year, payment_date__month=month).aggregate(Sum('amount'))
+
+            income = [{"id": "op_bal", "name": "Opening Balance", "amount": opening_balance},
+                      {"id": "main_bill", "name": "Maintenance Bills",
+                          "amount": maintenace['amount__sum']},
+                      {"id": "funhall_bill", "name": "Functional Hall",
+                          "amount": function_hall['amount__sum']},
+                      {"id": "oth_bill", "name": "Other Bills",
+                          "amount": others['amount__sum']},
+                      {"id": "expen", "name": "Expenditure", "amount": totalExpenditure['amount__sum']}]
+
             month = months[month]
             return render(request, 'association/ledger.html', {
-                "months":months,
+                "months": months,
                 "month": month,
                 "year": year,
                 "expenditures": expenditures,
-                "open_bal": opening_balance,
-                "maintenance": maintenace,
-                "function_hall": function_hall,
-                "other": others,
-                "expenditure": totalExpenditure,
+                "user": username,
+                "incomes": income
             })
-        
+
         return redirect('association-ledger')
-    
+
     today = datetime.date.today()
 
     year = today.year
     month = "{:02d}".format(today.month - 1)
-    if(month == 12):
+    if (month == 12):
         year -= 1
 
-    expenditures = Expenditure.objects.filter(month__year= year , month__month= month)
+    expenditures = Expenditure.objects.filter(
+        month__year=year, month__month=month)
+
     totalExpenditure = expenditures.aggregate(Sum('amount'))
     try:
-        opening_balance = BankBalance.objects.get(month__month = int(month) - 1, month__year = year).balance
+        opening_balance = BankBalance.objects.get(
+            month__month=int(month) - 1, month__year=year).balance
     except:
         opening_balance = False
-    maintenace = Payment.objects.filter(payment_for = 'MB', payment_date__year= year , payment_date__month= month).aggregate(Sum('amount'))
-    return render(request, 'association/ledger.html',{
-        "months":months,
+    maintenace = Payment.objects.filter(
+        payment_for='MB', payment_date__year=year, payment_date__month=month).aggregate(Sum('amount'))
+    function_hall = Payment.objects.filter(
+        payment_for='FH', payment_date__year=year, payment_date__month=month).aggregate(Sum('amount'))
+    others = Payment.objects.filter(
+        payment_for='OB', payment_date__year=year, payment_date__month=month).aggregate(Sum('amount'))
+    return render(request, 'association/ledger.html', {
+        "months": months,
         "month": months[month],
         "year": year,
         "expenditures": expenditures,
         "open_bal": opening_balance,
         "maintenance": maintenace,
+        "function_hall": function_hall,
+        "other": others,
         "expenditure": totalExpenditure,
-        "user": username
-    }) 
+        "user": username,
+    })
+
 
 @login_required(login_url='main')
 def addexpense(request):

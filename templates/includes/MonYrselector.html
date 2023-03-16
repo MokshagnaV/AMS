@@ -1,16 +1,28 @@
+<style>
+    .formcard{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    select.form-control{
+        color: #495057;
+    }
+</style>
+
 <form method="post">
     {% csrf_token %}
-    <select name="month" id="month">
-        <option>- Select a Month -</option>
-        {% for num, month in months.items %}
-        <option value="{{num}}">{{month}}</option>
-        {% endfor %}
-    </select>
-    <select name="year" id="year">
-        <option> - Select Year -</option>
-
-    </select>
-    <input type="submit" value="get" class="btn btn-primary btn-sm" name="submit">
+    <div class="formcard">
+        <select name="month" id="month"  class="form-control">
+            <option value="">- Select a Month -</option>
+            {% for num, month in months.items %}
+            <option value="{{num}}">{{month}}</option>
+            {% endfor %}
+        </select>
+        <select name="year" id="year" class="form-control">
+            <option value=""> - Select Year -</option>
+        </select>
+        <input type="submit" on-suv value="get" id="get" class="btn btn-primary btn-sm" name="submit">
+    </div>
 </form>
 
 <script>
@@ -21,4 +33,17 @@
     option.appendChild(document.createTextNode(i));
     years.appendChild(option);
     }
+
+    get = document.querySelector("#get");
+    selects = document.querySelectorAll("select");
+
+    get.addEventListener('submit', (evt) => {   
+        evt.preventDefault();
+        console.log(selects)
+        selects.forEach(s, ()=> {
+        if (s.value == ""){
+            alert("YOYO BIATCH");
+            return false;
+        }
+    })})
 </script>

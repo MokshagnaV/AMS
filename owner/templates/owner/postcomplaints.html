@@ -11,16 +11,27 @@
 
 {% block main %}
     <div class="main-wrap">
-        <div class="card">
-            <h1>Post your Complaints</h1>
-            <form action="" method="post">
+        
+    <div class="col-md-6 grid-margin stretch-card">
+            
+    <div class="card">
+        <div class="card-body">
+            <h2 style="text-align: center">Complaints</h2>
+            <p class="card-description"  style="text-align: center">
+                Post your complaint below
+            </p>
+            <form class="forms" method="post">
                 {% csrf_token %}
-                <div class="formdiv">
-                    <textarea name="complaint_desc" id="desc" cols="30" rows="10"></textarea>
-                    <input type="submit" id="submit" value="Post" class="submit button" name="submit"/>
-                    <input type="reset">
+                <div class="form-group">
+                    <label for="desc">Complaint Description</label>
+                    <textarea class="form-control" name="complaint_desc" id="desc" rows="10"></textarea>
                 </div>
-            </form>
+                
+                <input type="submit" class="btn btn-primary mr-2" id="submit" value="Post" name="submit"/>
+                <input type="reset" class="btn btn-light">
+        </form>
         </div>
     </div>
+</div>
+</div>
 {% endblock main %}

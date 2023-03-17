@@ -1,12 +1,9 @@
 
-.ledgerwrap{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 .result{
     margin: 1rem;
 }
 .form{
-    margin: .5rem
+    margin: 1rem;
 }
+

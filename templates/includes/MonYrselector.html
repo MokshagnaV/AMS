@@ -1,3 +1,4 @@
+{% load static %}
 <style>
     .formcard{
         display: flex;
@@ -21,29 +22,27 @@
         <select name="year" id="year" class="form-control">
             <option value=""> - Select Year -</option>
         </select>
-        <input type="submit" on-suv value="get" id="get" class="btn btn-primary btn-sm" name="submit">
+        <input type="submit" value="get" id="get" class="btn btn-primary btn-sm" name="submit">
     </div>
 </form>
 
-<script>
-    const years = document.querySelector("#year");
-    for(let i = 2010; i < 2040; i++){
-    const option = document.createElement("option");
-    option.setAttribute("value", i);
-    option.appendChild(document.createTextNode(i));
-    years.appendChild(option);
-    }
-
-    get = document.querySelector("#get");
-    selects = document.querySelectorAll("select");
-
-    get.addEventListener('submit', (evt) => {   
-        evt.preventDefault();
-        console.log(selects)
-        selects.forEach(s, ()=> {
-        if (s.value == ""){
-            alert("YOYO BIATCH");
-            return false;
-        }
-    })})
+  <!-- Modal -->
+  <div class="modal fade bd-example-modal-sm" id="validGet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Select Month and Year</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="{% static 'includes/MYS.js' %}">
+    
 </script>

@@ -1,5 +1,7 @@
 const years = document.querySelector("#year");
-for(let i = 2010; i < 2040; i++){
+const date = new Date();
+const year = date.getFullYear();
+for(let i = year; i > 2000; i--){
     const option = document.createElement("option");
     option.setAttribute("value", i);
     option.appendChild(document.createTextNode(i));

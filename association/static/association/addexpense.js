@@ -1,48 +1,33 @@
 let i = 1;
 
 const add_item = () => {
-    const main_div = document.createElement('div');
-    main_div.classList.add("item");
-    
-    const item_div = document.createElement('div');
-    const amount_div = document.createElement('div');
-
-    const item_label = document.createElement('label')
-    item_label.appendChild(document.createTextNode(`Item${i}`))
-    item_label.setAttribute("for", `item${i}`)
-
-    const item_input = document.createElement('input')
-    item_input.setAttribute("type", "text")
-    item_input.setAttribute("name", `expense${i}`)
-    item_input.setAttribute("id", `item${i}`)
-        
-
-    item_div.appendChild(item_label)
-    item_div.appendChild(item_input)
-
-    const amount_label = document.createElement('label')
-    amount_label.appendChild(document.createTextNode(`Amount${i}`))
-    amount_label.setAttribute("for", `amount${i}`)
-
-    const amount_input = document.createElement('input')
-    amount_input.setAttribute("type", "number")
-    amount_input.setAttribute("name", `amount${i}`)
-    amount_input.setAttribute("id", `amount${i}`)
-
-    amount_div.appendChild(amount_label)
-    amount_div.appendChild(amount_input)
-
-    main_div.appendChild(item_div)
-    main_div.appendChild(amount_div)
+    let main_div = document.createElement("div");
+    main_div.classList.add("items", "form-group", "row")
+    main_div.setAttribute("id", `item-box${i}`);
+    main_div.innerHTML = `
+        <div class="col">
+            <label for="item${i}">Item <span class="required">*</span></label>
+            <input type="text" class="form-control" name="expense${i}" id="item${i}" required>
+        </div>
+        <div class="col">
+            <label for="amount${i}">Amount <span class="required">*</span></label>
+            <input type="number" class="form-control" name="amount${i}" id="amount${i}" required>
+        </div>
+        <div class="del btn btn-inverse-danger btn-sm" onclick="delete_ele(this)" >Delete</div>
+`
     return main_div
 }
 
 
 
-const items = document.querySelector(".items");
+const items = document.querySelector(".form");
 const add = document.querySelector("#add");
-
 add.addEventListener('click', () => {
     i++;
     items.appendChild(add_item());
 })
+
+const delete_ele = (e) => {
+    
+    e.parentElement.outerHTML= "";
+}

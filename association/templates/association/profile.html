@@ -11,12 +11,20 @@
 {% endblock cssfiles %}
 
 {% block main %}
-    <a href="{% url 'edit-association-profile' %}">Edit profile</a>
-    <img src="{% if user.ProfilePic %} {{user.ProfilePic.url}} {% else %} {% static 'main/images/Default_Profile_Picture.png' %} {% endif %}" alt="dp" id="profile-pic">
-    <h1>Name: {{user.AssociationName}}</h1>
-    <p>  @{{ user.user }}</p>
-    <p><b>Role: </b> {{user.AssociationRole}}</p>
-    <p><b>Email: </b> {{ user.email }} </p>
-    <p><b>Contact: </b>{{ user.AssociationPhNo }} </p>
-    
+
+<div class="main-wrap">
+    <div class="card">
+        <div class="card-body">
+            <img src="{% if user.ProfilePic %} {{user.ProfilePic.url}} {% else %} {% static 'main/images/Default_Profile_Picture.png' %} {% endif %}" alt="dp" id="profile-pic">
+            <div class="dets">
+                <h4>Name: {{user.AssociationName}}</h4>
+                <p class="text-muted">  @{{ user.user }}</p>
+                <p><b>Role: </b> {{user.AssociationRole}}</p>
+                <p><b>Email: </b> {{ user.email }} </p>
+                <p><b>Contact: </b>{{ user.AssociationPhNo }} </p>
+                <a href="{% url 'edit-association-profile' %}">Edit profile</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock main %}

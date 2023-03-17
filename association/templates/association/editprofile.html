@@ -6,41 +6,57 @@
 {% endblock title %}
 
 {% block cssfiles %}
-    <link rel="stylesheet" href="{% static 'association/editprofile.css' %}">
+    <link rel="stylesheet" href="{% static 'owner/editprofile.css' %}">
 {% endblock cssfiles  %}
 
 {% block main %}
-<div class="center">
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-input">
+  <div class="main-wrap">
+  
+    <div class="col-mod-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Edit Profile</h4>
+          <p class="card-description">
+            Enter Details
+          </p>
+          <form class="forms-sample" method="POST" enctype="multipart/form-data">
             <div class="preview">
-                <img id="pic-preview" {% if user.ProfilePic %} src="{{user.ProfilePic.url}}" {% endif %}>
+              <img id="pic-preview" {% if user.ProfilePic %} src="{{user.ProfilePic.url}}" {% endif %}>
+          </div>
+  
+            <div class="form-group">
+              <label for="profile-pic">Upload Image</label>
+              <input class="form-control" type="file" id="profile-pic" name="profile-pic" accept="image/*" onchange="showPreview(event);">
             </div>
-            <div>
-                <label for="profile-pic">Upload Image</label>
-                <input type="file" id="profile-pic" name="profile-pic" accept="image/*" onchange="showPreview(event);">
+  
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Full Name" name="name" {% if user.AssociationName %}value="{{user.AssociationName}}"{% endif %} >
             </div>
-        
-            <div>
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" {% if user.AssociationName %}value="{{user.AssociationName}}"{% endif %} >
+  
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="Email" name="email" {% if user.email %}value="{{user.email}}"{% endif %} >
             </div>
-            <div>
-                <label for="email">Email </label>
-                <input type="text" id="email" name="email" {% if user.email %}value="{{user.email}}"{% endif %} >
+  
+  
+            <div class="form-group">
+              <label for="phone-num">Phone Number </label>
+              <input type="text" class="form-control" id="phone-num" name="phone-num"{% if user.AssociationPhNo %} value="{{user.AssociationPhNo}}"{% endif %}>
             </div>
-            <div>
-                <label for="phone-num">Phone Number </label>
-                <input type="text" id="phone-num" name="phone-num"{% if user.AssociationPhNo %} value="{{user.AssociationPhNo}}"{% endif %}>
-            </div>
-            <div>
+  
+            <div class="form-group">
                 <label for="role">Role</label>
-                <input type="text" id="role" name="role" {% if user.AssociationRole %}value="{{user.AssociationRole}}"{% endif %}>
+                <input type="text" id="role" class="form-control" name="role" {% if user.AssociationRole %}value="{{user.AssociationRole}}"{% endif %}>
             </div>
+            
+  
+            <input type="submit" name="submit" value="Done" class="btn btn-primary mr-2">
+            <a href="{% url 'association-profile' %}" class="btn btn-light">Cancel</a>
+          </form>
         </div>
-        <input type="submit" name="submit" value="Done">
-    </form>
-  </div> 
+      </div>
+  
+</div>
   <script src="{% static 'association/editprofile.js' %}" ></script>
 {% endblock main %}

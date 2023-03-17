@@ -1,18 +1,6 @@
-.main-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#date{
-    margin: 1rem;
-}
 .items{
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
-
-.item{
-    margin: 1rem;
+.required{
+    color: red;
 }

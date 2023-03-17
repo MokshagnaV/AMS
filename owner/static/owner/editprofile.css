@@ -1,22 +1,12 @@
-  .preview{
-    display: flex;
-    justify-content: center;
-  }
+.preview{
+  display: flex;
+  justify-content: center;
+}
 
-  #pic-preview{
-    width: 128px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #80bdff;
-  }  
-  .center {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .form-input{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+#pic-preview{
+  width: 128px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #80bdff;
+}  

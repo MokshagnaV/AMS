@@ -12,8 +12,12 @@
 
 
 {% block main %}
-<a href="{% url 'addexpense' %}">Add Item</a>
 <div class="main-wrap">
-    {% include 'includes/ledger.html' %}
+    <div class="card">
+        <div class="card-body">
+            {% include 'includes/ledger.html' %}
+        </div>  
+        <a href="{% url 'addexpense' %}" class="btn btn-inverse-info btn-sm">Add Item</a>
+    </div>
 </div>
 {% endblock main %}

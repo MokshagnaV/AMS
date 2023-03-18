@@ -10,37 +10,41 @@
 {% endblock cssfiles %}
 
 {% block main %}
-<div class="paymentwrap">
-    <div class="form">
-        {% include 'includes/MonYrselector.html' %}
+<div class="main-wrap">
+    <div>
+        
+            {% include 'includes/MonYrselector.html' %}
+        
+                {% if month_payments %}
+        
+                    {% for payment in month_payments %}
+                    <div class="payment">
+                        <p>{{ payment.payment_desc}} </p>
+                        <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
+                        <p>UTR: {{ payment.UTR }} </p>
+                        <p> {{ payment.payment_date}} </p>
+                    </div>
+                    {% endfor %}
+        
+                {% else %}
+        
+        
+                <div class="row row-cols-1 row-cols-md-2">
+                {% for payment in payments %}
+                    <div class="col mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>{{ payment.payment_desc | title}} </h4>
+                                <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
+                                <p>UTR: {{ payment.UTR }} , Reciept No: {{ payment.reciept_no }} </p>
+                                <p> {{ payment.payment_date}} </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+        
+                {% endif %}
     </div>
-    
-    {% if month_payments %}
-    
-        {% for payment in month_payments %}
-        <div class="payment">
-            <p>{{ payment.payment_desc}} </p>
-            <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
-            <p>UTR: {{ payment.UTR }} </p>
-            <p> {{ payment.payment_date}} </p>
-        </div>
-        {% endfor %}
-    
-    {% else %}
-    
-    <h1>All Payments</h1>
-    
-    <div class="payments">
-        {% for payment in payments %}
-        <div class="payment">
-            <p>{{ payment.payment_desc}} </p>
-            <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
-            <p>UTR: {{ payment.UTR }} , Reciept No: {{ payment.reciept_no }} </p>
-            <p> {{ payment.payment_date}} </p>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-    
 </div>
 {% endblock main %}

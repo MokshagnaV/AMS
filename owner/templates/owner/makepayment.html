@@ -20,13 +20,13 @@
             <form class="forms-sample" method="post">
               {% csrf_token %}
               <div class="form-group row">
-                <label for="amount" class="col-sm-3 col-form-label">Amount</label>
+                <label for="amount" class="col-sm-3 col-form-label">Amount <span class="req" >*</span> </label>
                 <div class="col-sm-9">
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text bg-primary text-white">₹</span>
                     </div>
-                    <input type="text" name='amount' class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" name='amount' class="form-control" aria-label="Amount (to the nearest dollar)" required>
                     <div class="input-group-append">
                       <span class="input-group-text">.00</span>
                     </div>
@@ -57,20 +57,20 @@
               </div>
              
               <div class="form-group" id="pay_desc">
-                <label for="payment_desc">Payment Description </label>
+                <label for="payment_desc">Payment Description <span class="req" >*</span> </label>
                 <textarea class="form-control" name="payment_desc" id="payment_desc" cols="30" rows="10"></textarea>
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="reciept_no">Reciept No </label>
+                <label class="col-sm-3 col-form-label" for="reciept_no">Reciept No <span class="req" >*</span> </label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control"  name="reciept_no" id="reciept_no" placeholder="Reciept No.">
+                  <input type="text" class="form-control"  name="reciept_no" id="reciept_no" placeholder="Reciept No." required>
                 </div>
               </div>
 
           
-              <div class="form-group row" id="utr">
-                <label for="utr" class="col-sm-3 col-form-label">UTR</label>
+              <div class="form-group row" id="utr-box">
+                <label for="utr" class="col-sm-3 col-form-label">UTR<span class="req" >*</span> </label>
                 <div class="col-sm-9">
                   <input type="text" name="utr" class="form-control" id="utr" placeholder="UTR">
                 </div>

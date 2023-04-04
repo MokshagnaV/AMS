@@ -10,7 +10,6 @@ def index(request):
     
 def owner_login(request):
     if request.method == 'POST':
-        print('HELLOO OWNER')
         form = request.POST['owner']
         if form == 'Login':
             username = request.POST['owner-username']

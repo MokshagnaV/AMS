@@ -6,3 +6,6 @@
 .btn{
     flex: 1;
 }
+.required{
+    color: red;
+}

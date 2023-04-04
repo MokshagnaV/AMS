@@ -42,7 +42,8 @@
   
             <div class="form-group">
               <label for="phone-num">Phone Number </label>
-              <input type="text" class="form-control" id="phone-num" name="phone-num"{% if user.OwnerPhNo %} value="{{user.OwnerPhNo}}"{% endif %}>
+              <input type="text" class="form-control" id="phone-num" pattern="/(6|7|8|9)\d{9}/" onkeypress="return (event.charCode > 47 && 
+              event.charCode < 58) || event.charCode==8"  name="phone-num"{% if user.OwnerPhNo %} value="{{user.OwnerPhNo}}"{% endif %}>
             </div>
   
             <div class="form-group">

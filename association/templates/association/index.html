@@ -1,10 +1,129 @@
 {% extends 'associationbase.html' %}
-
+{% load static %}
 {% block title %}
     Association 
 {% endblock title %}
 
 {% block main %}
-    <h1>Association Page</h1>
-    <h3>Welcome Back "{{user.AssociationName}}"!</h3>
+    {% comment %} <h1>Association Page</h1>
+    <h3>Welcome Back "{{user.AssociationName}}"!</h3> {% endcomment %}
+    <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-12 grid-margin">
+            <div class="row">
+              <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold">Welcome {{ user.AssociationName }} ({{user.AssociationRole}})</h3>
+                
+                <h6 class="font-weight-normal mb-0"><span class="text-primary">{{ notices.count }}</span> Notices </h6>
+              </div>
+              <div class="col-12 col-xl-4">
+               <div class="justify-content-end d-flex">
+                <!-- can any dropdown option -->
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 grid-margin stretch-card">
+            <div class="card tale-bg">
+              <div class="card-people mt-auto">
+                <img src="{% static 'owner/template/images/main.jpeg' %}" alt="people">
+                <div class="weather-info" id="weather">
+                 <div class="d-flex">
+                    <div>
+                      <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                    </div>
+                    <div class="ml-2">
+                      <h4 class="location font-weight-normal">Karimnagar</h4>
+                      <h6 class="font-weight-normal">India</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 grid-margin transparent" >
+              <h2>Notices</h2>
+              {% for notice in notices %}
+                <div class="col-md-6 mb-4 stretch-card transparent" style="min-width:100%;">
+                  <div class="card card-dark-blue">
+                    <div class="card-body">
+                      <p class="fs-30 mb-2 font-weight-bold">{{ notice.notice_title | title }}</p>
+                      <p class="mb-4 ">{{ notice.notice_desc }}</p>
+                      <p class='text-light'>This notice is posted by {{ notice.notice_by | title }}</p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col-md-7 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-title mb-0">All Payments</p>
+                <div class="table-responsive">
+                  <table class="table table-striped table-borderless">
+                    <thead>
+                      <tr>
+                        <th>Payment type</th>
+                        <th>Payment Description</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <!-- <th>Status</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Add Payment details as a table -->
+                      
+                      {% for payment in payments %}
+                      
+                      <tr>
+                        <td>{{ payment.payment_for }}</td>
+                        <td>{{ payment.payment_desc | default:"NA"}}</td>
+                        <td class="font-weight-bold">₹{{ payment.amount }}</td>
+                        <td>{{ payment.payment_date}}</td>
+                        <!-- <td class="font-weight-medium"><div class="badge badge-success"> { Status} </div></td> -->
+                      </tr>
+                      
+                      {% empty %}
+                      <tr><td colspan=4 align=center>No Payments Currently</td></tr>
+
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">All Complaints ({{complaints.count}})</h4>
+                <div class="list-wrapper pt-2" style='overflow-y: scroll; overflow-x: hidden;'>
+                  {% for complaint in complaints %}
+                    <div class="col-md-6 mb-4 stretch-card transparent" style="min-width:100%;">
+                      <div class="card card-light-blue">
+                        <div class="card-body">
+                          <h4 class="font-weight-bold" > {{ complaint.complaint_desc }} </h4>
+                          <p>Posted on: {{ complaint.issued_date }}</p>
+                          {% if complaint.resolved_date %}
+                              <div class="badge badge-success"> Resolved </div>
+                          {% endif %}
+                          {% if association %}
+                          <a href="{% url 'complaint-resolve' id=complaint.id %}"><input type="button" name="resolve" value="Resolved"></a>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  <a href="{% url 'complaints' %}">See more >></a>
+              </div>
+            </div>
+            <a href="{% url 'post-complaints' %}" class="btn btn-inverse-danger btn-fw" style="align-self: center; margin: 1rem;">Post a Complaint</a>
+          </div>
+        </div>
+    <script src="{% static 'owner/js/index.js' %}"></script>
 {% endblock main %}

@@ -30,6 +30,6 @@ textarea{
     resize: vertical;
 }
 
-.req{
+.required{
     color: red;
 }

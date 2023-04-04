@@ -350,23 +350,25 @@
                      <div class="titlepage" id="Contact Us">
                         <h2>Contact Us</h2>
                      </div>
-                     <form id="request" class="main_form">
+                     <form id="request" method="POST" class="main_form">
+
                         <div class="row">
                            <div class="col-md-12 ">
-                              <input class="contactus" placeholder="Full Name" type="type" name="Full Name"> 
+                              <input class="contactus" placeholder="Full Name" type="text" name="name"> 
                            </div>
                            <div class="col-md-12">
-                              <input class="contactus" placeholder="Email" type="type" name="Email"> 
+                              <input class="contactus" placeholder="Email" type="email" name="email"> 
                            </div>
                            <div class="col-md-12">
-                              <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">                          
+                              <input class="contactus" placeholder="Phone Number" pattern="/(6|7|8|9)\d{9}/" onkeypress="return (event.charCode > 47 && 
+                              event.charCode < 58) || event.charCode==8" type="text" name="phnumber">                          
                            </div>
                            <div class="col-md-12">
-                              <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message </textarea>
+                              <textarea class="textarea" placeholder="Message" type="text" name="message" Message="Name">Message </textarea>
                            </div>
                            <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                              <button class="send_btn">Send</button>
-                           </div>
+                              <input class="send_btn" type="submit" value="Send" name="submit" style='border:none'>
+                           </div> 
                         </div>
                      </form>
                   </div>

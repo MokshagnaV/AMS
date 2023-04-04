@@ -10,13 +10,13 @@
 {% endblock cssfiles %}
 
 {% block main %}
-    <main>
+    <div class="main-wrap">
         <div class="complaints-section">
             <h1>All Complaints</h1>
-            <div class="complaints">{% include 'includes/complaints.html' with association=True %}
+            <div class="complaints"><div class="row row-cols-1 row-cols-md-2">{% include 'includes/complaints.html' with association=True %}</div>
             </div>
         </div>
-    </main>
+    </div>
 {% endblock main %}
 
 

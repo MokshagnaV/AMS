@@ -16,9 +16,9 @@ months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":
 
 @login_required(login_url='main')
 def index(request):
+    user = request.user
+    username = OwnerProfile.objects.get(user= user)
     notices = Notice.objects.all().order_by("-id")
-    user = Owner.objects.get(username=request.user)
-    username = OwnerProfile.objects.get(user = user)
     complaints = Complaint.objects.filter(complaint_by=user).order_by("-id")
     payments = Payment.objects.filter(user = user)
 

@@ -1,17 +1,19 @@
-<div class="complaints">
-    {% for complaint in complaints %}
-        <div class="complaint">
-            <h2> {{ complaint.complaint_desc }} </h2>
+{% load custom %} 
+
+{% for complaint in complaints %}
+<div class="col mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h3> {{ complaint.complaint_desc | title}} </h3>
             <p>Posted on: {{ complaint.issued_date }}</p>
-            <p>Posteed by: {{ complaint.complaint_by }}</p>
+            <p>Posted by: {{ complaint.complaint_by }} ({{ allUsers|pos:complaint.complaint_by }})</p>
             {% if complaint.resolved_date %}
                 <span>Resolved</span>
             {% endif %}
-            
             {% if association %}
             <a href="{% url 'complaint-resolve' id=complaint.id %}"><input type="button" name="resolve" value="Resolved"></a>
             {% endif %}
-
         </div>
-    {% endfor %}
-</div>
+    </div>
+    </div>
+{% endfor %}

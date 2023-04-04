@@ -34,7 +34,7 @@
                     <div class="col mb-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4>{{ payment.payment_desc | title}} </h4>
+                                <h4>{{ payment.payment_desc | title | default:"NA"}} </h4>
                                 <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
                                 <p>UTR: {{ payment.UTR }} , Reciept No: {{ payment.reciept_no }} </p>
                                 <p> {{ payment.payment_date}} </p>

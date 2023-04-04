@@ -12,6 +12,7 @@
 
 {% block main %}
     <div class="main-wrap">
+    <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <img src="{% if user.ProfilePic %} {{user.ProfilePic.url}} {% else %} {% static 'main/images/Default_Profile_Picture.png' %} {% endif %}" alt="dp" id="profile-pic">
@@ -25,6 +26,7 @@
                     <a href="{% url 'edit-owner-profile' %}">Edit profile</a>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 {% endblock main %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from owner.models import Notice
 from .models import Complaint, Expenditure, Payment, BankBalance
 from django.urls import reverse
-from main.models import Association, AssociationProfile
+from main.models import Association, AssociationProfile, OwnerProfile
 from django.db.models import Sum
 from django.utils import timezone
 import datetime
@@ -14,9 +14,19 @@ months = {"01": "January", "02": "February", "03": "March", "04": "April", "05":
 
 @login_required(login_url='main')
 def index(request):
-    userName = AssociationProfile.objects.get(user = request.user)
+    try:
+        userName = AssociationProfile.objects.get(user = request.user)
+    except:
+        return redirect('main-login')
+
+    notices = Notice.objects.all().order_by("-id")[:4]
+    complaints = Complaint.objects.all().order_by("-id")[:3]
+    payments = Payment.objects.all()
     return render(request, 'association/index.html', {
-        "user": userName
+        "user": userName,
+        "complaints": complaints,
+        "payments": payments,
+        "notices": notices,
     })
 
 @login_required(login_url='main')
@@ -42,9 +52,15 @@ def notice_add(request):
 def complaints(request):
     complaints = Complaint.objects.all().order_by('-id')
     username = AssociationProfile.objects.get(user = request.user)
+    users = OwnerProfile.objects.all()
+    allUsers = {}
+    for u in users:
+        allUsers[str(u.user)] = u.FlatNo
+    
     return render(request, 'association/complaints.html', {
         "complaints": complaints ,
         "user": username,
+        "allUsers": allUsers,   
     })
 
 def ledger(request):
@@ -131,10 +147,10 @@ def ledger(request):
 @login_required(login_url='main')
 def addexpense(request):
     username = AssociationProfile.objects.get(user = request.user)
-
+ 
     if request.method == 'POST':
         form = request.POST['submit']
-        if form == 'submit':
+        if form == 'Submit':
             date = request.POST['date']
             try:
                 for i in range(1, 100):    

@@ -22,15 +22,15 @@
                     <form class="forms-sample" method="post">
                         {% csrf_token %}
                         <div class="form-group row">
-                            <label for="notice-title" class="col-sm-3 col-form-label font-weight-bold">Title</label>
+                            <label for="notice-title" class="col-sm-3 col-form-label font-weight-bold">Title <span class="required">*</span></label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="notice-title" id="notice-title">
+                                <input type="text" class="form-control" name="notice-title" id="notice-title" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="desc" class="col-sm-3 col-form-label font-weight-bold">Event Description:</label>
+                            <label for="desc" class="col-sm-3 col-form-label font-weight-bold">Event Description: <span class="required">*</span></label>
                             <div class="col-sm-9">
-                                <textarea name="desc" class="form-control" id="desc" cols="30" rows="10"></textarea>
+                                <textarea name="desc" class="form-control" id="desc" cols="30" rows="10" required></textarea>
                             </div>
                         </div>
 

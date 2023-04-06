@@ -217,7 +217,7 @@
          </div>
       </div>
       <!-- end wedo  section -->
-      <!-- testimonial -->
+      {% comment %} <!-- testimonial -->
       <div class="testimonial" id="Reviews">
          <div class="container">
             <div class="row">
@@ -231,11 +231,11 @@
             <div class="row">
                <div class="col-md-12">
                   <div id="myCarousel" class="carousel slide testimonial_Carousel " data-ride="carousel">
-                     {% comment %} <ol class="carousel-indicators">
+                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         <li data-target="#myCarousel" data-slide-to="1"></li>
                         <li data-target="#myCarousel" data-slide-to="2"></li>
-                     </ol> {% endcomment %}
+                     </ol>
                      <div class="carousel-inner">
                         <div class="carousel-item active">
                            <div class="container" id="Reviews">
@@ -243,7 +243,7 @@
                                  <div class="row">
                                     <div class="col-md-6 margin_boot">
                                        <div class="test_box">
-                                          {% comment %} <i><img src="{% static 'main/images/tes.jpg' %}" alt="#"/></i> {% endcomment %}
+                                          <i><img src="{% static 'main/images/tes.jpg' %}" alt="#"/></i>
                                           <h4>Venu Gopal</h4>
                                           <span>604</span>
                                           <p>It is one of the thokkalo apartments in karimanagr</p>
@@ -251,7 +251,7 @@
                                     </div>
                                     <div class="col-md-6 margin_boot">
                                        <div class="test_box">
-                                          {% comment %} <i><img src="{% static 'main/images/tes1.jpg' %}" alt="#"/></i> {% endcomment %}
+                                          <i><img src="{% static 'main/images/tes1.jpg' %}" alt="#"/></i>
                                           <h4>Srinivas</h4>
                                           <span>604</span>
                                           <p>The Apartment is Bokkalo Apartment </p>
@@ -323,7 +323,7 @@
             </div>
          </div>
       </div>
-      <!-- end testimonial -->
+      <!-- end testimonial --> {% endcomment %}
       </div>
       <!--  footer -->
       <footer id="contact">
@@ -346,33 +346,8 @@
                         <h2>Location</h2>
                      </div>
                   </div> {% endcomment %}
-                  <div class="col-md-6">
-                     <div class="titlepage" id="Contact Us">
-                        <h2>Contact Us</h2>
-                     </div>
-                     <form id="request" method="POST" class="main_form">
-
-                        <div class="row">
-                           <div class="col-md-12 ">
-                              <input class="contactus" placeholder="Full Name" type="text" name="name"> 
-                           </div>
-                           <div class="col-md-12">
-                              <input class="contactus" placeholder="Email" type="email" name="email"> 
-                           </div>
-                           <div class="col-md-12">
-                              <input class="contactus" placeholder="Phone Number" pattern="/(6|7|8|9)\d{9}/" onkeypress="return (event.charCode > 47 && 
-                              event.charCode < 58) || event.charCode==8" type="text" name="phnumber">                          
-                           </div>
-                           <div class="col-md-12">
-                              <textarea class="textarea" placeholder="Message" type="text" name="message" Message="Name">Message </textarea>
-                           </div>
-                           <div class="col-sm-col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                              <input class="send_btn" type="submit" value="Send" name="submit" style='border:none'>
-                           </div> 
-                        </div>
-                     </form>
-                  </div>
-                  <div class="col-md-6">
+                  
+                  <div class="col-md-12">
                      <div class="titlepage" id="Location">
                         <h2>Location</h2>
                      </div>

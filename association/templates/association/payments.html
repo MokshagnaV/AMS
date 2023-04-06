@@ -1,5 +1,6 @@
 {% extends 'associationbase.html' %}
 {% load static %}
+{% load custom %} 
 
 {% block title %}
     Ledger
@@ -12,31 +13,38 @@
 {% block main %}
 <div class="main-wrap">
     <div>
-        
             {% include 'includes/MonYrselector.html' %}
-        
+        {% if month and year %}
+            <h3>Payments of {{month}} {{year}} </h3>
                 {% if month_payments %}
-        
-                    {% for payment in month_payments %}
-                    <div class="payment">
-                        <p>{{ payment.payment_desc}} </p>
-                        <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
-                        <p>UTR: {{ payment.UTR }} </p>
-                        <p> {{ payment.payment_date}} </p>
+                <div class="row row-cols-1 row-cols-md-2">
+                        {% for payment in month_payments %}
+                            <div class="col mb-4">
+                                <div class="card card-tale">
+                                    <div class="card-body">
+                                        <h4>{{ payment.payment_desc | title | default:"NA"}} </h4>
+                                        <p>{{ payment.user | title }}<span class="font-weight-bold">({{ allUsers|pos:payment.user }})</span> paid <span class="font-weight-bold">{{ payment.amount }}</span> through <span class="font-weight-bold">{{ payment.payment_mode }}</span>. </p>
+                                        <p><span class="font-weight-bold">UTR:</span> {{ payment.UTR | default:"NA" }} , <span class="font-weight-bold">Reciept No:</span> {{ payment.reciept_no | default:"NA" }} </p>
+                                        <p> {{ payment.payment_date}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
                     </div>
-                    {% endfor %}
-        
+                    {% else %}
+                    <p class="text-danger">No Payments in this month</p>
+                    {% endif %}
                 {% else %}
         
-        
+                <h3>All Payments</h3>
                 <div class="row row-cols-1 row-cols-md-2">
                 {% for payment in payments %}
                     <div class="col mb-4">
-                        <div class="card">
+                        <div class="card card-tale">
                             <div class="card-body">
                                 <h4>{{ payment.payment_desc | title | default:"NA"}} </h4>
-                                <p>{{ payment.user | title }} paid {{ payment.amount }} through {{ payment.payment_mode }}. </p>
-                                <p>UTR: {{ payment.UTR }} , Reciept No: {{ payment.reciept_no }} </p>
+                                <p>{{ payment.user | title }}<span class="font-weight-bold">({{ allUsers|pos:payment.user }})</span> paid <span class="font-weight-bold">{{ payment.amount }}</span> through <span class="font-weight-bold">{{ payment.payment_mode }}</span>. </p>
+                                <p><span class="font-weight-bold">UTR:</span> {{ payment.UTR | default:"NA" }} , <span class="font-weight-bold">Reciept No:</span> {{ payment.reciept_no | default:"NA" }} </p>
                                 <p> {{ payment.payment_date}} </p>
                             </div>
                         </div>

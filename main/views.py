@@ -14,19 +14,22 @@ def owner_login(request):
         if form == 'Login':
             username = request.POST['owner-username']
             password = request.POST['owner-password']
+            try:
+                details = Owner.objects.get(role = 'Owner', username = username)
 
-            details = Owner.objects.get(role = 'Owner', username = username)
+                if details.role == 'OWNER':
+                    user= authenticate(request, username=username, password=password)
 
-            if details.role == 'OWNER':
-                user= authenticate(request, username=username, password=password)
-
-                if user is not None:
-                    request.session['uname']=username
-                    auth_login(request, user)
-                    return redirect('owner-home')
-                else:
-                    messages.info(request, 'Username Or Password is incorrect')
-                    return render(request, "main/login.html")
+                    if user is not None:
+                        request.session['uname']=username
+                        auth_login(request, user)
+                        return redirect('owner-home')
+                    else:
+                        messages.info(request, 'Username Or Password is incorrect')
+                        return render(request, "main/login.html")
+            except:
+                messages.info(request, 'Username Or Password is incorrect')
+                return render(request, "main/login.html")
     return redirect('main-login')
     
 
@@ -36,18 +39,21 @@ def association_login(request):
         if form == 'Login':
             username = request.POST['assocation-username']
             password = request.POST['assocation-password']
+            try:
+                details = Association.objects.get(role = 'Association', username = username)
+                if details.role == 'ASSOCIATION':
+                    user= authenticate(request, username=username, password=password)
 
-            details = Association.objects.get(role = 'Association', username = username)
-            if details.role == 'ASSOCIATION':
-                user= authenticate(request, username=username, password=password)
-
-                if user is not None:
-                    request.session['uname']=username
-                    auth_login(request, user)
-                    return redirect('association-home')
-                else:
-                    messages.info(request, 'Username Or Password is incorrect')
-                    return render(request, "main/login.html")
+                    if user is not None:
+                        request.session['uname']=username
+                        auth_login(request, user)
+                        return redirect('association-home')
+                    else:
+                        messages.info(request, 'Username Or Password is incorrect')
+                        return render(request, "main/login.html")
+            except:
+                messages.info(request, 'Username Or Password is incorrect')
+                return render(request, "main/login.html")
     return redirect('main-login')
 
 def login(request):

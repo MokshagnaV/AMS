@@ -20,7 +20,7 @@
             <form class="forms-sample" method="post">
               {% csrf_token %}
               <div class="form-group row">
-                <label for="amount" class="col-sm-3 col-form-label">Amount <span class="req" >*</span> </label>
+                <label for="amount" class="col-sm-3 col-form-label">Amount <span class="required" >*</span> </label>
                 <div class="col-sm-9">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -57,12 +57,12 @@
               </div>
              
               <div class="form-group" id="pay_desc">
-                <label for="payment_desc">Payment Description <span class="req" >*</span> </label>
+                <label for="payment_desc">Payment Description <span class="required" >*</span> </label>
                 <textarea class="form-control" name="payment_desc" id="payment_desc" cols="30" rows="10"></textarea>
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" for="reciept_no">Reciept No <span class="req" >*</span> </label>
+                <label class="col-sm-3 col-form-label" for="reciept_no">Reciept No <span class="required" >*</span> </label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control"  name="reciept_no" id="reciept_no" placeholder="Reciept No." required>
                 </div>
@@ -70,7 +70,7 @@
 
           
               <div class="form-group row" id="utr-box">
-                <label for="utr" class="col-sm-3 col-form-label">UTR<span class="req" >*</span> </label>
+                <label for="utr" class="col-sm-3 col-form-label">UTR<span class="required" >*</span> </label>
                 <div class="col-sm-9">
                   <input type="text" name="utr" class="form-control" id="utr" placeholder="UTR">
                 </div>

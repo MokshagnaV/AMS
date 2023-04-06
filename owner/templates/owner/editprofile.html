@@ -20,6 +20,7 @@
             Enter Details
           </p>
           <form class="forms-sample" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="preview">
               <img id="pic-preview" {% if user.ProfilePic %} src="{{user.ProfilePic.url}}" {% endif %}>
           </div>
@@ -42,7 +43,7 @@
   
             <div class="form-group">
               <label for="phone-num">Phone Number </label>
-              <input type="text" class="form-control" id="phone-num" pattern="/(6|7|8|9)\d{9}/" onkeypress="return (event.charCode > 47 && 
+              <input type="text" class="form-control" id="phone-num" pattern="[6|7|8|9]\d{9}" onkeypress="return (event.charCode > 47 && 
               event.charCode < 58) || event.charCode==8"  name="phone-num"{% if user.OwnerPhNo %} value="{{user.OwnerPhNo}}"{% endif %}>
             </div>
   
@@ -52,7 +53,7 @@
                   <option value="0">G</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
-                  {% if FloorNo %} <option value="{{user.FloorNo}}" selected>{{user.FloorNo}}</option> {% endif %}
+                  {% if user.FloorNo %} <option value="{{user.FloorNo}}" selected>{{user.FloorNo}}</option> {% endif %}
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>

@@ -1,22 +1,15 @@
-{% extends 'associationbase.html' %}
-{% load static %}
-
-{% block title %}
-    Complaints
-{% endblock title %}
-
-{% block cssfiles %}
-    <link rel="stylesheet" href="{% static 'includes/complaints.css' %}">
-{% endblock cssfiles %}
-
-{% block main %}
-    <div class="main-wrap">
-        <div class="complaints-section">
-            <h1>All Complaints</h1>
-            <div class="complaints"><div class="row row-cols-1 row-cols-md-2">{% include 'includes/complaints.html' with association=True %}</div>
-            </div>
-        </div>
+{% extends 'associationbase.html' %} {% load static %} {% block title %}
+Complaints {% endblock title %} {% block cssfiles %}
+<link rel="stylesheet" href="{% static 'includes/complaints.css' %}" />
+{% endblock cssfiles %} {% block main %}
+<div class="main-wrap">
+  <div class="complaints-section">
+    <h1>All Complaints</h1>
+    <div class="complaints">
+      <div class="row row-cols-1 row-cols-md-2">
+        {% include 'includes/complaints.html' with association=True %}
+      </div>
     </div>
+  </div>
+</div>
 {% endblock main %}
-
-

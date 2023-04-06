@@ -168,6 +168,11 @@ def addexpense(request):
 @login_required(login_url='main')
 def payments(request):
     username = AssociationProfile.objects.get(user = request.user)
+    users = OwnerProfile.objects.all()
+    allUsers = {}
+    for u in users:
+        allUsers[str(u.user)] = u.FlatNo
+    
 
     if request.method == 'POST':
         form = request.POST['submit']
@@ -180,7 +185,8 @@ def payments(request):
                 "months":months,
                 "month": month,
                 "year": year,
-                "month_payments": month_payments
+                "month_payments": month_payments,
+                "allUsers": allUsers,
             })
         return redirect('payments')    
 
@@ -188,9 +194,10 @@ def payments(request):
     return render(request, 'association/payments.html',{
         "months":months,
         "payments": payments,
-        "user": username
+        "user": username,
+        "allUsers": allUsers,
     })
-
+ 
 @login_required(login_url='main')
 def complaint_resolve(request, id):
 

@@ -2,16 +2,16 @@
 
 {% for complaint in complaints %}
 <div class="col mb-4">
-    <div class="card">
+    <div class="card {% if complaint.resolved_date %}card-tale {% else %}card-light-danger {% endif %} ">
         <div class="card-body">
-            <h3> {{ complaint.complaint_desc | title}} </h3>
+            <h3> {{ complaint.complaint_desc | title | default:"NA"}} </h3>
             <p>Posted on: {{ complaint.issued_date }}</p>
             <p>Posted by: {{ complaint.complaint_by }} ({{ allUsers|pos:complaint.complaint_by }})</p>
             {% if complaint.resolved_date %}
-                <span>Resolved</span>
+                <span class="btn btn-rounded btn-success btn-sm font-weight-bold">Resolved&#128077;</span>
             {% endif %}
-            {% if association %}
-            <a href="{% url 'complaint-resolve' id=complaint.id %}"><input type="button" name="resolve" value="Resolved"></a>
+            {% if association and not complaint.resolved_date %}
+            <a href="{% url 'complaint-resolve' id=complaint.id %}"><input type="button" class="btn btn-sm btn-success" name="resolve" value="Resolve"></a>
             {% endif %}
         </div>
     </div>

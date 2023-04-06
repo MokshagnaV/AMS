@@ -645,9 +645,6 @@ ul.btn li:last-child {
      padding-top: 20px;
 }
 
-.work{
-}
-
 .work figure {
      margin: 0;
 }
@@ -656,6 +653,7 @@ ul.btn li:last-child {
      aspect-ratio: 4/3;
      object-fit: cover;
      border-radius: 10%;
+     transition: ease-in all .5s;     
      
 }
 
@@ -688,7 +686,6 @@ ul.btn li:last-child {
 
 .col-md-6:hover .work figure img{
      filter: blur(1px);
-     transition: 0.5s ease-in-out;
 }
 
 .work_text h3 {

@@ -178,7 +178,7 @@ def profile(request):
 @login_required(login_url='main')
 def editprofile(request):
     owner = OwnerProfile.objects.get(user = request.user)
-
+    user = Owner.objects.get(username = request.user)
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'Done':
@@ -198,14 +198,16 @@ def editprofile(request):
                     owner.ProfilePic = dp
             except:
                 pass
+            user.email = email
             owner.email = email
             owner.OwnerName = name
             owner.OwnerPhNo = phno
             owner.FloorNo = floor
             owner.FlatNo = flat
+            user.save()
             owner.save()
             return redirect('owner-profile')
-
+    print(user.email)
     return render(request, 'owner/editprofile.html', {
         "user": owner,
     })

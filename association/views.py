@@ -221,7 +221,7 @@ def profile(request):
 @login_required(login_url='main')
 def editprofile(request):
     user = AssociationProfile.objects.get(user = request.user)
-
+    userlog = Association.objects.get(username = request.user)
     if request.method == 'POST':
         form = request.POST['submit']
         if form == 'Done':
@@ -238,11 +238,14 @@ def editprofile(request):
                     user.ProfilePic = dp
             except:
                 pass
+            userlog.email = email
             user.email = email
             user.AssociationName = name
             user.AssociationPhNo = phno
             user.AssociationRole = role
             user.save()
+            userlog.save()
+
             return redirect('association-profile')
 
     return render(request, 'association/editprofile.html', {

@@ -44,7 +44,7 @@
 						<i class="mdi mdi-eye" id="eye"></i>
 						<i class="mdi mdi-eye-off" id="eye-close"></i>
 					</div>
-					<a href="">Forgot Password</a>
+					<a href="{% url 'password_reset' %}">Forgot Password</a>
 					<div class="buttons">
 						<input type="submit" name="owner" value="Login" class="clkbtn">
 						<a href="{% url 'main-signup' %}" class="clkbtn">Signup</a>
@@ -62,7 +62,7 @@
 						<i class="mdi mdi-eye" id="eye"></i>
 											<i class="mdi mdi-eye-off" id="eye-close"></i>
 					</div>
-					<a href="">Forgot Password</a>
+					<a href="{% url 'password_reset' %}">Forgot Password</a>
 					<div class="buttons">
 						<input type="submit" name="association" value="Login" class="clkbtn">
 						<a href="{% url 'main-signup' %}" class="clkbtn">Signup</a>

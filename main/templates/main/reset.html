@@ -1,0 +1,18 @@
+{% extends 'password_reset.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Password Reset{% endblock title %}
+
+{% block cssfiles %}
+    {% comment %} <link rel="stylesheet" href="{% static 'main/css/reset.css' %}"> {% endcomment %}
+{% endblock cssfiles %}
+
+{% block main %}
+    <h3>Password reset</h3>
+    <p>Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one.</p>
+    <form method="POST" class="forms ">
+        {% csrf_token %}
+        {{form|crispy}}
+        <div><input type="submit" value="Reset my password" class="btn btn-sm btn-primary"></div>
+    </form>
+{% endblock main %}

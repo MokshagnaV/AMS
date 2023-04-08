@@ -71,7 +71,7 @@ def signup(request):
             phnum = request.POST['phnumber']
             
             if usertype == 'Owner' :
-                Owner.objects.create_user(username = username, password = password)
+                Owner.objects.create_user(username = username, password = password, email=email)
                 user = OwnerProfile.objects.get(user = Owner.objects.get(username = username))
                 user.OwnerName = name
                 user.email = email

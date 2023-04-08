@@ -66,8 +66,7 @@ header {
 	align-items: center;
 }
 
-.login,
-.signup {
+.login{
 	font-size: 22px;
 	border: none;
 	outline: none;
@@ -107,8 +106,7 @@ header {
 	left: -500px;
 }
 
-.login-box,
-.signup-box {
+.login-box{
 	height: 100%;
 	width: 500px;
 	display: flex;
@@ -119,12 +117,9 @@ header {
 }
 
 .login-box {
-	gap: 50px;
+	gap: 25px;
 }
 
-.signup-box {
-	gap: 30px;
-}
 
 .ele {
 	height: 60px;
@@ -171,8 +166,7 @@ header {
 		margin: 20px auto;
 	}
 
-	.login,
-	.signup {
+	.login{
 		font-size: 19px;
 	}
 
@@ -196,8 +190,7 @@ header {
 		left: -300px;
 	}
 
-	.login-box,
-	.signup-box {
+	.login-box{
 		height: 100%;
 		width: 300px;
 	}
@@ -235,8 +228,7 @@ header {
 		margin: 20px auto;
 	}
 
-	.login,
-	.signup {
+	.login{
 		font-size: 19px;
 	}
 
@@ -259,8 +251,7 @@ header {
 		left: -250px;
 	}
 
-	.login-box,
-	.signup-box {
+	.login-box{
 		height: 100%;
 		width: 250px;
 	}
@@ -276,4 +267,25 @@ header {
 		width: 130px;
 		font-size: 19px;
 	}
+}
+
+
+
+
+
+#eye, #eye-close{
+    z-index: 20;
+    font-size: 27px;
+    text-align: end;
+    position: absolute;
+    top: 14px;
+    right: 22px;
+}
+#eye-close{
+    display: none;
+}
+
+.passdiv{
+    position: relative;
+
 }

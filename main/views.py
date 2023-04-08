@@ -80,7 +80,7 @@ def signup(request):
                 return redirect('main-login')
 
             elif usertype == 'Association':
-                Association.objects.create_user(username = username, password = password)
+                Association.objects.create_user(username = username, password = password, email = email)
                 user = AssociationProfile.objects.get(user = Association.objects.get(username = username))
                 user.AssociationName = name
                 user.email = email

@@ -8,7 +8,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>Login Page</title>
 	<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
-</head>
+      <link rel="icon" href="{% static 'main/images/logo.png' %}" type="image/gif" />
+	</head>
 
 <body>
 	<style>
@@ -23,7 +24,7 @@
 		<h1 class="heading">Login Page</h1>
 	</header>
 	{% for msg in messages %}
-                <p>{{msg}}</p>
+                <p class="msg">{{msg}}</p>
 	{% endfor %}
 	<div class="container">
 		<div class="slider"></div>

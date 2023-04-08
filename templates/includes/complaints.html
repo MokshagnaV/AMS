@@ -8,7 +8,7 @@
             <p>Posted on: {{ complaint.issued_date }}</p>
             <p>Posted by: {{ complaint.complaint_by }} ({{ allUsers|pos:complaint.complaint_by }})</p>
             {% if complaint.resolved_date %}
-                <span class="btn btn-rounded btn-success btn-sm font-weight-bold">Resolved&#128077;</span>
+                <span class="badge badge-success font-weight-bold">Resolved&#128077;</span>
             {% endif %}
             {% if association and not complaint.resolved_date %}
             <a href="{% url 'complaint-resolve' id=complaint.id %}"><input type="button" class="btn btn-sm btn-success" name="resolve" value="Resolve"></a>

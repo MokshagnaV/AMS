@@ -5,6 +5,7 @@ urlpatterns = [
     path('profile/', views.profile, name='association-profile'),
     path('profile/edit/', views.editprofile, name='edit-association-profile'),
     path('notice_add/', views.notice_add, name="notices_add"),
+    path('notice_del/<int:id>', views.notice_del, name="notices_del"),
     path('complaints/', views.complaints, name='complaints'),
     path('ledger/', views.ledger, name='association-ledger'),
     path('ledger/add', views.addexpense, name='addexpense'),

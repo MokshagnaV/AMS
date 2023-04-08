@@ -1,0 +1,43 @@
+
+#pass-error{
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .75s ease-in-out;
+}
+
+
+.validations{
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .75s ease-in-out;
+}
+
+.valid{
+    color: #57B657;
+}
+.valid::before{
+    content: "✔";
+}
+.invalid{
+    color: #FF4747;
+}
+.invalid::before{
+    content: "✖";
+}
+
+#eye, #eye-close{
+    z-index: 20;
+    font-size: 22px;
+    text-align: end;
+    position: absolute;
+    top: 13px;
+    right: 14px;
+}
+#eye-close{
+    display: none;
+}
+
+.passdiv{
+    position: relative;
+
+}

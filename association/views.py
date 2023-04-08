@@ -48,6 +48,11 @@ def notice_add(request):
         "user": username
     })
 
+def notice_del(request, id):
+    Notice.objects.get(id=id).delete()
+
+    return redirect("association-home")
+
 @login_required(login_url='main')
 def complaints(request):
     complaints = Complaint.objects.all().order_by('-id')

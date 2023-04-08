@@ -6,18 +6,20 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>signup</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{% static 'owner/template/vendors/feather/feather.css' %}">
   <link rel="stylesheet" href="{% static 'owner/template/vendors/ti-icons/css/themify-icons.css' %}">
   <link rel="stylesheet" href="{% static 'owner/template/vendors/css/vendor.bundle.base.css' %}">
   <!-- endinject -->
   <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'owner/template/vendors/mdi/css/materialdesignicons.min.css' %}">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{% static 'owner/template/css/vertical-layout-light/style.css' %}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{% static 'owner/template/images/favicon.png' %}" />
+  <link rel="shortcut icon" href="{% static 'main/images/logo.png' %}" />
+  <link rel="stylesheet" href="{% static 'main/css/signup.css' %}">
   <script src="{% static 'main/js/signup.js' %}" defer></script>
     
 </head>
@@ -27,8 +29,10 @@
 		.content-wrapper{
 			background-image: url({% static 'main/images/entrance.jpeg' %});
 			background-blend-mode: multiply;
-			background-size: 100%;
+			background-size: 120%;
+      background-position: right;
 			backdrop-filter: blur(8px);
+      background-repeat: no-repeat;
 		}
 	</style>
     
@@ -68,11 +72,22 @@
                   </select>
                 </div>
 
-                <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" name="pass" id="pwd" placeholder="Password"  required>
-                </div>
-                <div class="form-group">
+                <div class="form-group passdiv">
+                    <input type="password" class="form-control form-control-lg" name="pass" id="pwd" placeholder="Password"  required> 
+                    <i class="mdi mdi-eye" id="eye"></i>
+                    <i class="mdi mdi-eye-off" id="eye-close"></i>
+                    <div class="validations">
+                     <p class="invalid" id="let">password must contains 8 letters are more </p>
+                     <p class="invalid" id="cap">Must contain atleast one Capital Letter </p>
+                     <p class="invalid" id="spe">Must contain atleast one Special Character </p>
+                     <p class="invalid" id="num">Must contain atleast one number</p>
+                    </div>
+                 </div>
+                <div class="form-group passdiv">
                     <input type="password" class="form-control form-control-lg" name="confpas" id="confpwd" placeholder="Confirm Password" required>
+                    <i class="mdi mdi-eye" id="eye"></i>
+                    <i class="mdi mdi-eye-off" id="eye-close"></i>
+                    <p id="pass-error" class="text-danger">*Password and Confirm Password should be same</p>
                 </div>
 
                 

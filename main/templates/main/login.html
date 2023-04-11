@@ -38,9 +38,9 @@
 			<form action="{% url 'owner-login' %}" method="POST">
 				{% csrf_token %}
 				<div class="login-box">
-					<div><input type="username" class="email ele" name="owner-username" placeholder="username"></div>
+					<div><input type="username" class="email ele" name="owner-username" placeholder="username" required></div>
 					<div class="passdiv">
-						<input type="password" class="password ele" name="owner-password" placeholder="password">
+						<input type="password" class="password ele" name="owner-password" placeholder="password" required>
 						<i class="mdi mdi-eye" id="eye"></i>
 						<i class="mdi mdi-eye-off" id="eye-close"></i>
 					</div>
@@ -56,9 +56,9 @@
 			<form action="{% url 'association-login' %}" method="POST">
 				{% csrf_token %}
 				<div class="login-box">
-					<div><input type="username" class="email ele" name="assocation-username" placeholder="username"></div>
+					<div><input type="username" class="email ele" name="assocation-username" placeholder="username" required></div>
 					<div class="passdiv">
-						<input type="password" class="password ele" name="assocation-password" placeholder="password">
+						<input type="password" class="password ele" name="assocation-password" placeholder="password" required>
 						<i class="mdi mdi-eye" id="eye"></i>
 											<i class="mdi mdi-eye-off" id="eye-close"></i>
 					</div>

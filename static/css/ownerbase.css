@@ -28,3 +28,7 @@ select.form-control{
     display: flex;
   }
 }
+
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile img{
+  object-fit: cover;
+}

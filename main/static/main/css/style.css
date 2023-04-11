@@ -153,6 +153,10 @@ a,
      transition: all .3s ease-in-out;
 }
 
+#logo{
+     height: 47px;
+}
+
 img {
      max-width: 100%;
      height: auto;

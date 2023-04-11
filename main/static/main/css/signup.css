@@ -42,3 +42,6 @@
     position: relative;
 
 }
+#submit:disabled{
+    cursor: not-allowed;
+}

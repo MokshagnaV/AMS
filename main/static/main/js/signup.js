@@ -11,10 +11,12 @@ confpass.addEventListener('input', () => {
     if (passvalue === passcheck) {
         passErrorMsg.style["max-height"] = "0"; 
         submit.removeAttribute("disabled")
+        submit.removeAttribute("title")
     }else if(!submit.hasAttribute("disabled"))
     {
         passErrorMsg.style["max-height"] = "500px"; 
         submit.setAttribute("disabled", "");
+        submit.setAttribute("title", "Fill Required Fields");
     }else{
         passErrorMsg.style["max-height"] = "500px"; 
     } 
